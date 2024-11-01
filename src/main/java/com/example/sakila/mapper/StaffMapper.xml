@@ -12,7 +12,6 @@
 				, store_id storeId
 				, address_id addressId
 				, email
-				, store_id storeId
 				, username
 				, last_update lastUpdate
 		from staff

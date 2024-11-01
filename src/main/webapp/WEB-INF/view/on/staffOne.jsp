@@ -15,9 +15,41 @@
 			<!-- leftMenu.jsp include -->
 			<c:import url="/WEB-INF/view/on/inc/leftMenu.jsp"></c:import>
 		</div>
-		<div class="col-sm-10">
+		<div class="col-sm-10 text-center">
 			<!-- maincontent -->
-			<h1>staffOne</h1>
+			<div class="container mt-3">
+				<h1>staffOne</h1>
+				<table class="table table-striped table-bordered">
+					<tr>
+						<td>firstName</td>
+						<td>${staff.firstName}</td>
+					</tr>
+					<tr>
+						<td>lastName</td>
+						<td>${staff.lastName}</td>
+					</tr>
+					<tr>
+						<td>storeId</td>
+						<td>${staff.storeId}</td>
+					</tr>
+					<tr>
+						<td>addressId</td>
+						<td>${staff.addressId}</td>
+					</tr>
+					<tr>
+						<td>email</td>
+						<td>${staff.email}</td>
+					</tr>
+					<tr>
+						<td>username</td>
+						<td>${staff.username}</td>
+					</tr>
+					<tr>
+						<td>lastUpdate</td>
+						<td>${staff.lastUpdate}</td>
+					</tr>
+				</table>
+			</div>
 		</div>
 	</div>
 </body>

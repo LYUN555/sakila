@@ -12,24 +12,24 @@
 		</li>
 		<hr> ::: 지점관리 :::<hr>		
 		<li class="list-group-item">
-			<a href="${pageContext.request.contextPath}/on/logout">지점 추가</a>
+			<a href="${pageContext.request.contextPath}/on/logout">지점 리스트</a>
 		</li>
 		<li class="list-group-item">
-			<a href="${pageContext.request.contextPath}/on/logout">지점 수정</a>
+			<a href="${pageContext.request.contextPath}/on/logout">지점 추가</a>
 		</li>
 		<hr> ::: STAFF 관리 :::<hr>		
 		<li class="list-group-item">
-			<a href="${pageContext.request.contextPath}/on/logout">STAFF 추가</a>
+			<a href="${pageContext.request.contextPath}/on/logout">스탭 리스트</a>
 		</li>
 		<li class="list-group-item">
-			<a href="${pageContext.request.contextPath}/on/logout">STAFF 수정</a>
+			<a href="${pageContext.request.contextPath}/on/logout">스탭 추가</a>
 		</li>
 		<hr> ::: 고객 관리 :::<hr>		
 		<li class="list-group-item">
-			<a href="${pageContext.request.contextPath}/on/logout">고객 추가</a>
+			<a href="${pageContext.request.contextPath}/on/logout">고객 리스트</a>
 		</li>
 		<li class="list-group-item">
-			<a href="${pageContext.request.contextPath}/on/logout">고객 수정</a>
+			<a href="${pageContext.request.contextPath}/on/logout">고객 추가</a>
 		</li>
 	</ul>
 </div>
