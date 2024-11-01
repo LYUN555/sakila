@@ -19,7 +19,17 @@ public class LoginController {
 	@Autowired
 	private StaffMapper staffMapper;
 	
-	// form
+	
+	
+	// logout action
+	@GetMapping("/on/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		log.debug("/off/logout 실행됨.");
+		return "redirect:/off/login";
+	}
+	
+	// login form
 	@GetMapping("/off/login")
 	public String login() {
 		
@@ -28,8 +38,8 @@ public class LoginController {
 		return "off/login";
 	}
 	
-	// action
-	@PostMapping("off/login")
+	// login action
+	@PostMapping("/off/login")
 	public String login(Model model, HttpSession session,
 						@RequestParam(name = "staffId") int staffId, // int staffId = Integer.parseInt(request.getParameter("")),...
 						@RequestParam(name = "password") String password) { 
@@ -41,9 +51,9 @@ public class LoginController {
 		Staff loginStaff = staffMapper.login(parmaStaff);
 		if(loginStaff == null) {
 			model.addAttribute("msg", "로그인 실패");
-			return "/off/login"; // 포워딩
+			return "off/login"; // 포워딩
 		}
-		session.setAttribute("lofinStaff", loginStaff);
+		session.setAttribute("loginStaff", loginStaff);
 		
 		return "redirect:/on/main";
 	}

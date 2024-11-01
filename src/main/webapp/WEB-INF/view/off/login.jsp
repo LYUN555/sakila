@@ -14,7 +14,7 @@
         <div class="card-body">
             <h5 class="card-title text-center">Staff Login</h5>
             <div class="text-danger text-center mt-2">${msg}</div>
-            <form action="${pageContext.request.contextPath}/off/login" method="post">
+            <form action="${pageContext.request.contextPath}/off/login" method="post" id = "form">
                 <div class="mb-3">
                     <label for="staffId" class="form-label">Staff ID:</label>
                     <input type="text" class="form-control" id="staffId" name="staffId">
@@ -23,11 +23,26 @@
                     <label for="password" class="form-label">Password:</label>
                     <input type="password" class="form-control" id="password" name="password">
                 </div>
-                <button type="submit" class="btn btn-success w-100">로그인</button>
+                <button type="button" class="btn btn-success w-100" id="btn" >로그인</button>
+    			<hr class="my-4">
+            	<button type="reset" class="btn btn-primary w-100">리셋</button>
             </form>
-    		 <hr class="my-4">
-            <button type="submit" class="btn btn-primary w-100">회원가입</button>
         </div>
     </div>
 </body>
+
+<script>
+	// btn 버튼 클릭시 폼값 유효성 검사
+	$('#btn').click(function() {
+		console.log('click');
+		// 숫자가 아니면 isNan() or $.isNumeric()
+		if($.isNumeric($('#staffId').val()) == false){
+			alert('staffId는 숫자만 입력 가능');
+		} else if($('#password').val().length < 4) {
+			alert('password는 4자 이상 가능');
+		} else {
+			$('#form').submit();
+		}
+	});
+</script>
 </html>
