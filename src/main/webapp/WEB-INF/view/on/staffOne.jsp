@@ -19,35 +19,87 @@
 			<!-- maincontent -->
 			<div class="container mt-3">
 				<h1>staffOne</h1>
-				<table class="table table-striped table-bordered">
-					<tr>
-						<td>firstName</td>
-						<td>${staff.firstName}</td>
-					</tr>
-					<tr>
-						<td>lastName</td>
-						<td>${staff.lastName}</td>
-					</tr>
-					<tr>
-						<td>storeId</td>
-						<td>${staff.storeId}</td>
-					</tr>
-					<tr>
-						<td>addressId</td>
-						<td>${staff.addressId}</td>
-					</tr>
-					<tr>
-						<td>email</td>
-						<td>${staff.email}</td>
-					</tr>
-					<tr>
-						<td>username</td>
-						<td>${staff.username}</td>
-					</tr>
-					<tr>
-						<td>lastUpdate</td>
-						<td>${staff.lastUpdate}</td>
-					</tr>
+				<table class="table table-bordered">
+					<thead class="table-secondary">
+						<tr>
+							<td>staffId</td>
+							<td>${staff.staffId}</td>
+						</tr>
+						<tr>
+							<td>firstName</td>
+							<td>${staff.firstName}</td>
+						</tr>
+						<tr>
+							<td>staffAddress</td>
+							<td>${staff.staffAddress}</td>
+						</tr>
+						<tr>
+							<td>staffAddress2</td>
+							<td>${staff.staffAddress2}</td>
+						</tr>
+						<tr>
+							<td>staffDistrict</td>
+							<td>${staff.staffDistrict}</td>
+						</tr>
+						<tr>
+							<td>staffPostCode</td>
+							<td>${staff.staffPostCode}</td>
+						</tr>
+						<tr>
+							<td>staffPhone</td>
+							<td>${staff.staffPhone}</td>
+						</tr>
+						<tr>
+							<td>staffCity</td>
+							<td>${staff.staffCity}</td>
+						</tr>
+						<tr>
+							<td>staffCountry</td>
+							<td>${staff.staffCountry}</td>
+						</tr>
+					</thead>
+					<thead class="table-success">
+						<tr>
+							<td>storeId</td>
+							<td>${staff.storeId}</td>
+						</tr>
+						<tr>
+							<td>managerStaffId</td>
+							<td>${staff.managerStaffId}</td>
+						</tr>
+						<tr>
+							<td>managerName</td>
+							<td>${staff.managerName}</td>
+						</tr>
+						<tr>
+							<td>storeAddress</td>
+							<td>${staff.storeAddress}</td>
+						</tr>
+						<tr>
+							<td>storeAddress2</td>
+							<td>${staff.storeAddress2}</td>
+						</tr>
+						<tr>
+							<td>storeDistrict</td>
+							<td>${staff.storeDistrict}</td>
+						</tr>
+						<tr>
+							<td>storePostCode</td>
+							<td>${staff.storePostCode}</td>
+						</tr>
+						<tr>
+							<td>storePhone</td>
+							<td>${staff.storePhone}</td>
+						</tr>
+						<tr>
+							<td>storeCity</td>
+							<td>${staff.storeCity}</td>
+						</tr>
+						<tr>
+							<td>storeCountry</td>
+							<td>${staff.storeCountry}</td>
+						</tr>
+					</thead>
 				</table>
 			</div>
 		</div>
