@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Staff {
-	private int staffId; //pk
+	private int staffId;
 	private String firstName;
 	private String lastName;
 	private int addressId; // fk
