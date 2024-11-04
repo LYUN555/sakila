@@ -2,6 +2,66 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.sakila.mapper.StaffMapper">
 	
+	<!-- 스태프 개별수정 -->
+	<update id="updateStaff" parameterType="com.example.sakila.vo.Staff">
+	    update staff
+	  <set>
+			<if test="addressId != null and addressId != '' ">
+				address_id = #{addressId},
+			</if>
+			<if test="email != null and email != '' ">
+				email = #{email},
+			</if>
+			<if test="storeId != null and storeId != '' ">
+				store_id = #{storeId},
+			</if>
+			<if test="active != null and active != '' ">
+				active = #{active},
+			</if>
+			<if test="password != null and password != '' ">
+				password = #{password},
+			</if>
+		</set>
+	       where staff_id = #{staffId}
+	</update>
+	
+	<!-- 스태프리스트 페이징 -->
+	<select id="selectStaffCount"
+			resultType="int">
+			select count(*) from staff
+	</select>
+	
+	
+	<!-- 스태프 리스트 -->
+	<select id="selectStaffList"
+			parameterType="Map"
+			resultType="com.example.sakila.vo.Staff">
+			select
+				staff_id staffId
+				, first_name firstName
+				, last_name lastName
+				, address_id addressId
+				, email
+				, store_id storeId
+				, active
+				, username
+				, last_update lastUpdate
+			from staff
+			order by staff_id
+			limit #{beginRow}, #{rowPerPage}
+				
+	</select>
+	
+	<!-- 스태프 추가 -->
+	<insert id="insertStaff"
+			parameterType="com.example.sakila.vo.Staff">
+			insert into staff(
+				first_name, last_name, address_id, email, store_Id, username
+			)values(#{firstName}, #{lastName}, #{addressId}, #{email}, #{storeId}, #{username});
+	
+	</insert>
+	
+	<!-- StaffOne 상세정보 --> 
 	<select id = "selectStaffOne"
 			parameterType="int"
 			resultType="map">
@@ -108,6 +168,7 @@
 		where t4.staff_id = #{staffId}
 	</select>
 	
+	<!-- 로그인 -->
 	<select id = "login"
 			parameterType="com.example.sakila.vo.Staff"
 			resultType="com.example.sakila.vo.Staff">

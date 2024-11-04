@@ -1,5 +1,6 @@
 package com.example.sakila.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +34,18 @@ public class StaffController {
 	@Autowired
 	private AddressMapper addressMapper;
 	
+	// active 수정
+	@GetMapping("/on/modifyStaffActive")
+	public String modifyStaffActive(Staff staff) {
+		if(staff.getActive() == 1) {
+			staff.setActive(2);
+		} else {
+			staff.setActive(1);
+		}
+		int row = staffMapper.updateStaff(staff); // 어떤 컬럼값을 수정하던  mapper메서드는 하나다!
+		return "redirect:/on/staffList";
+	}
+	
 	// leftMenu.a 태그, addStaff.주소검색
 	@GetMapping("/on/addStaff")
 	public String addStaff(Model model, @RequestParam(defaultValue = "")String searchAddress) {
@@ -53,12 +66,36 @@ public class StaffController {
 	public String addStaff2(Staff staff) { 
 		// 커맨드 객체 생성 -> 커맨드객체.set(request.getParameter())
 		// insert 호출
+		log.debug(staff.toString());
+		int row = staffMapper.insertStaff(staff);
+		log.debug("row :"+ row);
+		if(row==0) {
+			return "on/addStaff";
+		}
 		return "redirect:/on/staffList";
 	}
 	
 	@GetMapping("/on/staffList")
-	public String staffList(Model model, @RequestParam(defaultValue = "1") int currentPage) {
+	public String staffList(Model model, @RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "10") int rowPerPage) {
 		// model(staffList)
+		Map<String,Object> map = new HashMap<>();
+		int beginRow = (currentPage-1)*rowPerPage;
+		map.put("beginRow", beginRow);
+		map.put("rowPerPage", rowPerPage);
+		log.debug(map.toString());
+		
+		List<Staff> staffList = staffMapper.selectStaffList(map);
+		log.debug(staffList.toString());
+		int count = staffMapper.selectStaffCount();
+		int lastPage = count/rowPerPage;
+		if(count % rowPerPage != 0) {
+			lastPage++;
+		}
+		model.addAttribute("staffList",staffList);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("lastPage",lastPage);
+		
+		
 		return "on/staffList";
 	}
 	

@@ -82,7 +82,7 @@
 					<tr>
 						<td>userName</td>
 						<td>
-							<input type="text" name="userName" id="userName">
+							<input type="text" name="username" id="username">
 						</td>
 					</tr>
 				</table>
@@ -101,12 +101,12 @@
 			alert('firstName를 입력하세요(3자 이상)');
 		} else if($('#lastName').val() == null || $('#lastName').val().length < 3){
 			alert('lastName를 입력하세요(3자 이상)');
-		} else if($('#email').val() == null || $('#email').val().length<4 || $('#email').val().indexOf('@')){
+		} else if($('#email').val() == null || $('#email').val().length<4 || $('#email').val().indexOf('@')== -1){
 			alert('email은 4자 이상, @ 포함 되어야 합니다');
-		} else if($('#userName').val() == null || $('#userName').val().length < 4){
-			alert('userName를 입력하세요(4자 이상)');
+		} else if($('#username').val() == null || $('#username').val().length < 4){
+			alert('username를 입력하세요(4자 이상)');
 		} else {
-			$('#addForm').submit
+			$('#addForm').submit();
 		}
 	});
 	// 주소 선택 버튼
