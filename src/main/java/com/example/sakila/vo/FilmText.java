@@ -3,8 +3,8 @@ package com.example.sakila.vo;
 import lombok.Data;
 
 @Data
-public class filmCategory {
+public class FilmText {
 	private int filmId;
-	private int categoryId;
-	private String lastUpdate;
+	private String title;
+	private String description;
 }

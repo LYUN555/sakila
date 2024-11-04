@@ -3,7 +3,7 @@ package com.example.sakila.vo;
 import lombok.Data;
 
 @Data
-public class rental {
+public class Rental {
 	private int rentalId;
 	private String rentalDate;
 	private int inventoryId;

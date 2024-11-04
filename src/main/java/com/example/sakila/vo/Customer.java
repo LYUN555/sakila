@@ -3,7 +3,7 @@ package com.example.sakila.vo;
 import lombok.Data;
 
 @Data
-public class customer {
+public class Customer {
 	private int customerId;
 	private int storeId;
 	private String firstName;
