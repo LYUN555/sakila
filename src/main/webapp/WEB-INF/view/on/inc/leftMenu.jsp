@@ -19,10 +19,10 @@
 		</li>
 		<hr> ::: STAFF 관리 :::<hr>		
 		<li class="list-group-item">
-			<a href="${pageContext.request.contextPath}/on/logout">스탭 리스트</a>
+			<a href="${pageContext.request.contextPath}/on/staffList">스탭 리스트</a>
 		</li>
 		<li class="list-group-item">
-			<a href="${pageContext.request.contextPath}/on/logout">스탭 추가</a>
+			<a href="${pageContext.request.contextPath}/on/addStaff">스탭 추가</a>
 		</li>
 		<hr> ::: 고객 관리 :::<hr>		
 		<li class="list-group-item">
