@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: sakila
+Bundle-SymbolicName: sakila
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Automatic-Module-Name: sakila
+Export-Package: com.example.sakila,
+ com.example.sakila.controller,
+ com.example.sakila.mapper,
+ com.example.sakila.vo
