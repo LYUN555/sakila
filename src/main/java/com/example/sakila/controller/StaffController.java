@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.sakila.mapper.AddressMapper;
 import com.example.sakila.mapper.StaffMapper;
 import com.example.sakila.mapper.StoreMapper;
+import com.example.sakila.service.AddressService;
+import com.example.sakila.service.StaffService;
+import com.example.sakila.service.StoreService;
 import com.example.sakila.vo.Address;
 import com.example.sakila.vo.Staff;
 import com.example.sakila.vo.Store;
@@ -26,13 +30,13 @@ import lombok.extern.slf4j.Slf4j;
 public class StaffController {
 	
 	@Autowired
-	private StaffMapper staffMapper;
+	StaffService staffService;
 	
 	@Autowired
-	private StoreMapper storeMapper;
+	private StoreService storeService;
 	
 	@Autowired
-	private AddressMapper addressMapper;
+	private AddressService addressService;
 	
 	// active 수정
 	@GetMapping("/on/modifyStaffActive")
@@ -42,7 +46,7 @@ public class StaffController {
 		} else {
 			staff.setActive(1);
 		}
-		int row = staffMapper.updateStaff(staff); // 어떤 컬럼값을 수정하던  mapper메서드는 하나다!
+		int row = staffService.modifyStaff(staff); // 어떤 컬럼값을 수정하던  mapper 메서드는 하나
 		return "redirect:/on/staffList";
 	}
 	
@@ -51,11 +55,11 @@ public class StaffController {
 	public String addStaff(Model model, @RequestParam(defaultValue = "")String searchAddress) {
 		// model(storeList)
 		log.debug("searchAddress :", searchAddress);
-		List<Store> storeList = storeMapper.selectStoreList();
+		List<Store> storeList = storeService.getStoreList();
 		model.addAttribute("storeList",storeList);
 		// model(addressList) <- 검색후 공백이 아니면
 		if(!searchAddress.equals("")) {
-			List<Address> addressList = addressMapper.selectAddressListByWord(searchAddress);
+			List<Address> addressList = addressService.getAddressListByWorld(searchAddress);
 			log.debug(addressList.toString());
 			model.addAttribute("addressList", addressList);
 		}
@@ -67,7 +71,7 @@ public class StaffController {
 		// 커맨드 객체 생성 -> 커맨드객체.set(request.getParameter())
 		// insert 호출
 		log.debug(staff.toString());
-		int row = staffMapper.insertStaff(staff);
+		int row = staffService.addStaff(staff);
 		log.debug("row :"+ row);
 		if(row==0) {
 			return "on/addStaff";
@@ -84,13 +88,10 @@ public class StaffController {
 		map.put("rowPerPage", rowPerPage);
 		log.debug(map.toString());
 		
-		List<Staff> staffList = staffMapper.selectStaffList(map);
+		List<Staff> staffList = staffService.getStaffList(map);
 		log.debug(staffList.toString());
-		int count = staffMapper.selectStaffCount();
-		int lastPage = count/rowPerPage;
-		if(count % rowPerPage != 0) {
-			lastPage++;
-		}
+		int lastPage = staffService.getLastPage(rowPerPage);
+		
 		model.addAttribute("staffList",staffList);
 		model.addAttribute("currentPage",currentPage);
 		model.addAttribute("lastPage",lastPage);
@@ -102,7 +103,7 @@ public class StaffController {
 	@GetMapping("/on/staffOne")
 	public String staffOne(HttpSession session, Model model) {
 		int staffId = ((Staff)(session.getAttribute("loginStaff"))).getStaffId();
-		Map<String, Object> staff = staffMapper.selectStaffOne(staffId);
+		Map<String, Object> staff = staffService.getStaffOne(staffId);
 		model.addAttribute("staff",staff);
 		log.debug(staff.toString());
 		return "on/staffOne";
