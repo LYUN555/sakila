@@ -12,4 +12,9 @@ public class ActorForm { // ActorCommand
 	private String lastName;
 	private List<MultipartFile> actorFile;
 	
+//	public Actor getActor() {
+//		Actor a = new Actor();
+//		a.setFirstName(this.getFirstName());
+//		return a;
+//	}
 }
