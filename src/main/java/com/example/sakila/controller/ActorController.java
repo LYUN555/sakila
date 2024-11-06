@@ -30,6 +30,7 @@ public class ActorController {
 	@Autowired
 	private FilmService filmService;
 	
+	
 	@GetMapping("/on/actorOne")
 	public String actorOne(Model model, @RequestParam int actorId) {
 		Actor actor = actorService.getActorOne(actorId);
@@ -44,6 +45,7 @@ public class ActorController {
 		model.addAttribute("filmList",filmList);
 		return "on/actorOne";
 	}
+	
 	@GetMapping("/on/actorList")
 	public String actorList(Model model,
 							@RequestParam(defaultValue = "1") int currentPage, 

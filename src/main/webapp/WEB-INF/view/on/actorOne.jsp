@@ -64,9 +64,19 @@
 			</div>
 			<!-- film -->
 			<h2>출연 작품</h2>
-			<c:forEach var="f" items="${filmList}">
-				<a href="${pageContext.request.contextPath}/on/filmOne?filmId=${f.filmId}">${f.title}</a>
-			</c:forEach>
+			<div>
+			    <table class="table table-striped">
+		            <c:forEach var="f" items="${filmList}">
+		                <tr>
+		                    <td>
+		                        <a href="${pageContext.request.contextPath}/on/filmOne?filmId=${f.filmId}">
+		                            ${f.title}
+		                        </a>
+		                    </td>
+		                </tr>
+		            </c:forEach>
+			    </table>
+			</div>
 		</div>
 	</div>
 </body>

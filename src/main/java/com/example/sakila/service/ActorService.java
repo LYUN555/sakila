@@ -19,6 +19,9 @@ import com.example.sakila.vo.Actor;
 import com.example.sakila.vo.ActorFile;
 import com.example.sakila.vo.ActorForm;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 @Transactional
 public class ActorService {
@@ -26,6 +29,13 @@ public class ActorService {
 	private ActorMapper actorMapper;
 	@Autowired
 	private ActorFileMapper actorFileMapper;
+	
+	// /on/filmOne
+	public List<Actor> getActorListByFilm(int filmId) {
+		List<Actor> actorlist = actorMapper.selectActorListByFilm(filmId);
+		log.debug("actorlist :"+actorlist.toString());
+		return actorlist;
+	}
 	
 	// actorOne
 	public Actor getActorOne(int actorId) {

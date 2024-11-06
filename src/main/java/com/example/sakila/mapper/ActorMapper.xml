@@ -49,4 +49,15 @@
 		from actor
 		where actor_id = #{actorId}
 	</select>
+	
+	<!-- /on/filmOne -->
+	<select id="selectActorListByFilm" parameterType="int" resultType="com.example.sakila.vo.Actor">
+		select 
+			a.actor_id actorId,
+			a.first_name firstName,
+			a.last_name lastName
+		from film_actor fa inner join actor a
+		on fa.actor_id = a.actor_id
+		where fa.film_id = #{filmId}
+	</select>
 </mapper>
