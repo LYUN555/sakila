@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.sakila.mapper.ActorMapper">
-	<insert id="insertActor"
-			parameterType="com.example.sakila.vo.Actor">
+	<!-- mybatis 매핑은 자동증가를 명시적으로 처리를 해야해서 selectkey를 쓴다 -->
+	<insert id="insertActor" parameterType="com.example.sakila.vo.Actor">
 			<selectKey resultType="int" keyProperty="actorId" order="AFTER">
 				select last_insert_id()
 			</selectKey>
@@ -12,4 +12,41 @@
 			#{firstName}, #{lastName}
 		)
 	</insert>
+	
+	<select id="selectActorList" parameterType="Map" resultType="com.example.sakila.vo.Actor">
+		select
+			actor_id actorId,
+			first_name firstName,
+			last_name lastName
+		from actor
+		<where>
+			<if test="searchWord != null">
+				first_name like concat('%',#{searchWord},'%')
+				or last_name like concat('%',#{searchWord},'%')
+			</if>
+		</where>
+		order by actor_id asc
+		limit #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<select id="selectActorCount" parameterType="String" resultType="int">
+		select count(*)
+		from actor
+		<where>
+			<if test="searchWord != null">
+				first_name like concat('%',#{searchWord},'%')
+				or last_name like concat('%',#{searchWord},'%')
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectActorOne" parameterType="int" resultType="com.example.sakila.vo.Actor">
+		select
+			actor_id actorId,
+			first_name firstName,
+			last_name lastName,
+			last_update lastUpdate
+		from actor
+		where actor_id = #{actorId}
+	</select>
 </mapper>

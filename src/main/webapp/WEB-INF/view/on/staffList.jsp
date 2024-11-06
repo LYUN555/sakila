@@ -55,17 +55,44 @@
 					</tr>
 				</c:forEach>
 			</table>
-		<div class="text-center">
-			<c:if test="${currentPage > 1}">
-				<a href="${pageContext.request.contextPath}/on/staffList?currentPage=1" class="btn btn-secondary">첫페이지</a>
-				<a href="${pageContext.request.contextPath}/on/staffList?currentPage=${currentPage-1}" class="btn btn-secondary">이전</a>
-			</c:if>
-			<span>[${currentPage}]</span>
-			<c:if test="${currentPage < lastPage}">
-				<a href="${pageContext.request.contextPath}/on/staffList?currentPage=${currentPage+1}" class="btn btn-secondary">다음</a>
-				<a href="${pageContext.request.contextPath}/on/staffList?currentPage=${lastPage}" class="btn btn-secondary">마지막페이지</a>
-			</c:if>
-		</div>
+			<div>
+				<nav aria-label="Page navigation">
+				    <ul class="pagination justify-content-center">
+				    
+				        <li class="page-item">
+				            <a class="page-link" href="${pageContext.request.contextPath}/on/actorList?currentPage=1">첫 페이지</a>
+				        </li>
+				        
+				        <c:if test="${currentPage > 1}">
+				            <li class="page-item">
+				                <a class="page-link" href="${pageContext.request.contextPath}/on/actorList?currentPage=${currentPage-1}">이전</a>
+				            </li>
+				        </c:if>
+				        <c:if test="${currentPage <= 1}">
+				            <li class="page-item disabled">
+				                <a class="page-link" href="#">이전</a>
+				            </li>
+				        </c:if>
+						<li class="page-item">
+			                <span class="page-link">${currentPage}</span>
+			            </li>
+				        <c:if test="${currentPage < lastPage}">
+				            <li class="page-item">
+				                <a class="page-link" href="${pageContext.request.contextPath}/on/actorList?currentPage=${currentPage+1}">다음</a>
+				            </li>
+				        </c:if>
+				        <c:if test="${currentPage >= lastPage}">
+				            <li class="page-item disabled">
+				                <a class="page-link" href="#">다음</a>
+				            </li>
+				        </c:if>
+				
+				        <li class="page-item">
+				            <a class="page-link" href="${pageContext.request.contextPath}/on/actorList?currentPage=${lastPage}">마지막</a>
+				        </li>
+				    </ul>
+				</nav>
+			</div>
 		</div>
 	</div>
 </body>
