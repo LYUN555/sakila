@@ -20,10 +20,10 @@ import lombok.extern.slf4j.Slf4j;
 public class FilmController {
 
 	@Autowired
-	FilmService filmService;
+	private FilmService filmService;
 	
 	@Autowired
-	ActorService actorService;
+	private ActorService actorService;
 	
 	@GetMapping("/on/filmOne")
 	public String filmOne(Model model, @RequestParam int filmId) {

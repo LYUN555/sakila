@@ -13,7 +13,7 @@ import com.example.sakila.vo.Address;
 @Transactional
 public class AddressService {
 	@Autowired
-	AddressMapper addressMapper;
+	private AddressMapper addressMapper;
 	
 	public List<Address> getAddressListByWorld(String searchAddress){
 		return addressMapper.selectAddressListByWord(searchAddress);

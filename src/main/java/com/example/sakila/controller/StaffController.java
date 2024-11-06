@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 public class StaffController {
 	
 	@Autowired
-	StaffService staffService;
+	private StaffService staffService;
 	
 	@Autowired
 	private StoreService storeService;
