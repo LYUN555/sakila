@@ -23,27 +23,20 @@
 			<form id="formAddFilm" method = "post" action="${pageContext.request.contextPath}/on/addFilm">
 				<table class = "table table-striped" style="width: 80%">
 					<tr>
-						<td>title</td>
+						<td>타이틀</td>
 						<td>
 							<input type = "text" id = "title" name="title">
 						</td>
 						
 					</tr>
 					<tr>
-						<td>description</td>
-						<td>
-							<!-- textarea -->
-							<textarea rows="3" cols="50" id = "description" name ="description"></textarea>
-						</td>
-					</tr>
-					<tr>
-						<td>releaseYear</td>
+						<td>개봉 날짜</td>
 						<td>
 							<input type="number" id="releaseYear" name="releaseYear">
 						</td>
 					</tr>
 					<tr>
-						<td>languageId</td>
+						<td>언어</td>
 						<td>
 							<select id="languageId" name="languageId">
 								<option value="">언어선택</option>
@@ -54,7 +47,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td>originalLanguageId</td>
+						<td>오리지널 언어</td>
 						<td>
 							<select id="originalLanguageId" name="originalLanguageId">
 								<option value="">오리지널언어선택</option>
@@ -65,34 +58,41 @@
 						</td>
 					</tr>
 					<tr>
-						<td>rentalDuration</td>
+						<td>설명</td>
+						<td>
+							<!-- textarea -->
+							<textarea rows="3" cols="50" id = "description" name ="description"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>대여 기간</td>
 						<td>
 							<!-- db기본값 : 3 -->
 							<input type="number" id="rentalDuration" name="rentalDuration" value="3">
 						</td>
 					</tr>
 					<tr>
-						<td>rentalRate</td>
+						<td>대여 가격</td>
 						<td>
 							<!-- db기본값 : 4.99 -->
 							<input type="number" id="rentalRate" name="rentalRate" value="4.99">
 						</td>
 					</tr>
 					<tr>
-						<td>length</td>
+						<td>상영 시간</td>
 						<td>
 							<input type="number" id="length" name="length">분
 						</td>
 					</tr>
 					<tr>
-						<td>replacementCost</td>
+						<td>교체 비용</td>
 						<td>
 							<!-- db기본값 : 19.99 -->
 							<input type="number" id="replacementCost" name="replacementCost" value="19.99">
 						</td>
 					</tr>
 					<tr>
-						<td>rating</td>
+						<td>등급</td>
 						<td>
 							<!-- radio, db기본값(enum(G, PG,PG-13, R, NC-17) : 'G'-->
 							<input type="radio" name="rating"  class = "rating" value="G">G<br>
@@ -104,7 +104,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td>specialFeatures</td>
+						<td>특수 기능</td>
 						<td>
 							<!-- checkBox, SET('Trailers', 'Commentaries', 'Deleted Scenes', 'Behind the Scenes') db기본값 : null -->
 							<input type="checkbox" name="specialFeatures" class="specialFeatures" value="Trailers">Trailers<br>
@@ -121,8 +121,22 @@
 </body>
 <script>
 	$('#btnAddFilm').click(function() {
-		
-		$('#formAddFilm').submit();
+		// 폼 유효성 검사(description, releaseYear, originalLanguageId, length, specialFeatures 제외)
+		if($('#title').val() == ''){
+			alert('제목을 입력하세요');
+		} else if($('#languageId').val() == ''){
+			alert('언어를 선택하세요');
+		} else if(isNaN(Number($('#rentalDuration').val()))) {
+	        alert('대여기간을 입력하세요');
+	    } else if(isNaN(Number($('#rentalRate').val()))) {
+	        alert('대여가격 숫자를 입력하세요');
+	    } else if(isNaN(Number($('#replacementCost').val()))) {
+	        alert('교체 비용 숫자를 입력하세요');
+	    } else if($('.rating:checked').length < 1) {
+	        alert('등급 을 선택하세요');
+	    } else {
+	        $('#formAddFilm').submit();
+	    }
 	});
 </script>
 </html>

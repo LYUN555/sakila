@@ -7,17 +7,17 @@ import lombok.Data;
 @Data
 public class FilmForm {
 	private String title;
-	private String description;
-	private String releaseYear;
+	private String description; // null 
+	private Integer releaseYear; // null
 	private int languageId;
-	private int originalLanguageId;
+	private Integer originalLanguageId; // null
 	private int rentalDuration;
 	private double rentalRate;
-	private int length;
+	private Integer length; // null
 	private double replacementCost;
 	private String rating;
-	//private String[] specialFeatures;
 	private List<String> specialFeatures;
+	//private String[] specialFeatures;
 	
 	
 }
