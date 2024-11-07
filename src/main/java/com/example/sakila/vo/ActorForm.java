@@ -8,13 +8,8 @@ import lombok.Data;
 
 @Data
 public class ActorForm { // ActorCommand
+	private int actorId;
 	private String firstName;
 	private String lastName;
 	private List<MultipartFile> actorFile;
-	
-//	public Actor getActor() {
-//		Actor a = new Actor();
-//		a.setFirstName(this.getFirstName());
-//		return a;
-//	}
 }

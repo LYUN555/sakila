@@ -1,10 +1,11 @@
 package com.example.sakila.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
-public class Film {
-	private int filmId;
+public class FilmForm {
 	private String title;
 	private String description;
 	private String releaseYear;
@@ -15,6 +16,8 @@ public class Film {
 	private int length;
 	private double replacementCost;
 	private String rating;
-	private String specialFeatures;
-	private String lastUpdate;
+	//private String[] specialFeatures;
+	private List<String> specialFeatures;
+	
+	
 }

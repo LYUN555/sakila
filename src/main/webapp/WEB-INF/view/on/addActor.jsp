@@ -21,6 +21,7 @@
         <div class="col-sm-10">
             <!-- main content -->
             <h1 class="text-center my-4">배우 추가</h1>
+            <div class = "text text-danger">${msg}</div>
             <form id="formActor" method="post" action="${pageContext.request.contextPath}/on/addActor" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="firstName" class="form-label">First Name</label>

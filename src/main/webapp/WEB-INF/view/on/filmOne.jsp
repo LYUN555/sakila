@@ -20,9 +20,12 @@
 		<div class="col-sm-10">
 			<!-- main content -->
 			<h1>FILM ONE</h1>
-		
-		
-		
+			<div>
+				${film}
+			</div>
+			<div>
+				<a href="">영화 수정</a>			
+			</div>
 			<h2>작품에 출연한 배우</h2>
 			<div>
 				<table class="table table-striped">

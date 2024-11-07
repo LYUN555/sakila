@@ -12,10 +12,10 @@
 		</li>
 		<hr> ::: 지점관리 :::<hr>		
 		<li class="list-group-item">
-			<a href="${pageContext.request.contextPath}/on/logout">지점 리스트</a>
+			<a href="${pageContext.request.contextPath}/on/">지점 리스트</a>
 		</li>
 		<li class="list-group-item">
-			<a href="${pageContext.request.contextPath}/on/logout">지점 추가</a>
+			<a href="${pageContext.request.contextPath}/on/">지점 추가</a>
 		</li>
 		<hr> ::: STAFF 관리 :::<hr>		
 		<li class="list-group-item">
@@ -24,12 +24,19 @@
 		<li class="list-group-item">
 			<a href="${pageContext.request.contextPath}/on/addStaff">스탭 추가</a>
 		</li>
-		<hr> ::: 고객 관리 :::<hr>		
+		<hr> ::: 영화 관리 :::<hr>		
 		<li class="list-group-item">
-			<a href="${pageContext.request.contextPath}/on/logout">고객 리스트</a>
+			<a href="${pageContext.request.contextPath}/on/">영화 리스트</a>
 		</li>
 		<li class="list-group-item">
-			<a href="${pageContext.request.contextPath}/on/logout">고객 추가</a>
+			<a href="${pageContext.request.contextPath}/on/addFilm">영화 추가</a>
+		</li>
+		<hr> ::: 고객 관리 :::<hr>		
+		<li class="list-group-item">
+			<a href="${pageContext.request.contextPath}/on/">고객 리스트</a>
+		</li>
+		<li class="list-group-item">
+			<a href="${pageContext.request.contextPath}/on/">고객 추가</a>
 		</li>
 		<hr> ::: 배우 관리 :::<hr>		
 		<li class="list-group-item">
@@ -37,6 +44,9 @@
 		</li>
 		<li class="list-group-item">
 			<a href="${pageContext.request.contextPath}/on/addActor">배우 추가</a>
+		</li>
+		<li class="list-group-item">
+			<a href="${pageContext.request.contextPath}/on/addActor">통계</a>
 		</li>
 	</ul>
 </div>
