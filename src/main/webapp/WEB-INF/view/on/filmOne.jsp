@@ -20,12 +20,46 @@
 		<div class="col-sm-10">
 			<!-- main content -->
 			<h1>FILM ONE</h1>
+			<table class="table table-striped">
+			    <tbody>
+			        <tr>
+			            <td><strong>타이틀:</strong></td>
+			            <td>${film.title}</td>
+			        </tr>
+			        <tr>
+			            <td><strong>설명:</strong></td>
+			            <td>${film.description}</td>
+			        </tr>
+			        <tr>
+			            <td><strong>상영 시간:</strong></td>
+			            <td>${film.length} 분</td>
+			        </tr>
+			        <tr>
+			            <td><strong>등급:</strong></td>
+			            <td>${film.rating}</td>
+			        </tr>
+			        <tr>
+			            <td><strong>대여 가격:</strong></td>
+			            <td>${film.rentalRate} USD</td>
+			        </tr>
+			        <tr>
+			            <td><strong>발매 연도:</strong></td>
+			            <td>${film.releaseYear}</td>
+			        </tr>
+			        <tr>
+			            <td><strong>언어:</strong></td>
+			            <td>${film.language}</td>
+			        </tr>
+			        <tr>
+			            <td><strong>특별 기능:</strong></td>
+			            <td>${film.specialFeatures}</td>
+			        </tr>
+			    </tbody>
+			</table>
 			<div>
-				${film}
+				<a href="" class="btn btn-success">영화 수정</a>			
 			</div>
-			<div>
-				<a href="">영화 수정</a>			
-			</div>
+			<hr>
 			<h2>작품에 출연한 배우</h2>
 			<div>
 				<table class="table table-striped">

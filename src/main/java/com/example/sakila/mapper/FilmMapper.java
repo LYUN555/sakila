@@ -13,4 +13,6 @@ public interface FilmMapper {
 	
 	// film, language
 	Map<String, Object> selectFilmOne(int filmId);
+	
+	int insertFilm(Film film);
 }

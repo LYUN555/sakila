@@ -35,7 +35,7 @@ public class FilmController {
 		log.debug("film :" + film.toString());
 		List<Actor> actorList = actorService.getActorListByFilm(filmId);
 		log.debug("actorList :" + actorList.toString());
-		model.addAttribute("film : ",film);
+		model.addAttribute("film",film);
 		model.addAttribute("actorList", actorList);
 		return "on/filmOne";
 	}
@@ -53,6 +53,7 @@ public class FilmController {
 	public String addFilm(FilmForm filmForm) {
 		log.debug(filmForm.toString());
 		// filmService : filmForm -< film
+		filmService.addFilm(filmForm);
 		return "redirect:/on/filmList";
 	}
 }

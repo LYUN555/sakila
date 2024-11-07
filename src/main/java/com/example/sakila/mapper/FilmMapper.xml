@@ -29,4 +29,32 @@
 		on fi.language_id = la.language_id
 		where fi.film_id = #{filmId}
 	</select>
+	
+	<insert id="insertFilm" parameterType="com.example.sakila.vo.Film">
+		insert into film(
+			title,
+			description,
+			release_year,
+			language_id,
+			original_language_id,
+			rental_duration,
+			rental_rate,
+			length,
+			replacement_cost,
+			rating,
+			special_features
+			) values(
+				#{title},
+				#{description},
+				#{releaseYear},
+				#{languageId},
+				#{originalLanguageId},
+				#{rentalDuration},
+				#{rentalRate},
+				#{length},
+				#{replacementCost},
+				#{rating},
+				#{specialFeatures}
+			)
+	</insert>
 </mapper>

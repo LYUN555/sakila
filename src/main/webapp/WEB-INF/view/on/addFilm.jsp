@@ -30,7 +30,7 @@
 						
 					</tr>
 					<tr>
-						<td>개봉 날짜</td>
+						<td>발매연도</td>
 						<td>
 							<input type="number" id="releaseYear" name="releaseYear">
 						</td>
@@ -104,7 +104,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td>특수 기능</td>
+						<td>특별 기능</td>
 						<td>
 							<!-- checkBox, SET('Trailers', 'Commentaries', 'Deleted Scenes', 'Behind the Scenes') db기본값 : null -->
 							<input type="checkbox" name="specialFeatures" class="specialFeatures" value="Trailers">Trailers<br>
