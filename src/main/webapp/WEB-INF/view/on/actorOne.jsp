@@ -82,18 +82,19 @@
 			</div>
 			<!-- film -->
 			<h2>출연 작품</h2>
+			<div class= "text text-danger">${param.msg}</div>
 			<div>
 				<!-- 출연작 추가 -->
 				<form id="formSearchFilm" method="get" action="${pageContext.request.contextPath}/on/actorOne"> <!-- 영화 검색 -->
 					<!-- film 검색시 actorId 도 넘긴다 -->
 					<input type="hidden" name="actorId" value="${actor.actorId}">
-					<input type="text" name="searchTitle">
+					<input type="text" name="searchTitle" id = "searchTitle">
 					<button id="btnSearchFilm" type="button">영화 검색</button>
 				</form>
 				
 				<form id="formAddFilm" method="post" action="${pageContext.request.contextPath}/on/addFilmByActor">
 					<input type="hidden" name="actorId" value="${actor.actorId}">
-					<select size="5" name = "filmId" >
+					<select size="5" name = "filmId"  id = "filmId">
 						<c:forEach var="sf" items="${searchFilmList}">
 							<option value="${sf.filmId}">${sf.title}</option>
 						</c:forEach>
@@ -124,11 +125,19 @@
 <script>
 	// film Title 검색
 	$('#btnSearchFilm').click(function() {
+		if ($('#searchTitle').val() == '') {
+			alert("영화 제목을 입력해 주세요.");
+			return;
+		}
 		$('#formSearchFilm').submit();
 	});
 	
 	// 출연작(film) 추가
 	$('#btnAddFilm').click(function() {
+		if($('#filmId').val().length == 0){
+			alert("영화를 선택해주세요");
+			return;
+		}
 		$('#formAddFilm').submit();
 	});
 </script>

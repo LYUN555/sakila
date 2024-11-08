@@ -20,7 +20,11 @@ public class FilmActorService {
 		return filmActorMapper.insertFilmActor(filmActor);
 	}
 	
-	public int removeFilmActori(FilmActor filmActor) {
+	public int removeFilmActor(FilmActor filmActor) {
 		return filmActorMapper.deleteFilmActor(filmActor);
+	}
+	
+	public int countFilmActor(FilmActor filmActor) {
+		return filmActorMapper.countFilmActor(filmActor);
 	}
 }
