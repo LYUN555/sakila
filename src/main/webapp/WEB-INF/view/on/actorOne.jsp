@@ -52,7 +52,8 @@
 				</tr>
 			</table>
 			<div>
-				<a href="${pageContext.request.contextPath}/on/modifyActor" class="btn btn-success" >actor 수정[과제 : 입력폼, 액션, 서비스, 맵퍼]</a>
+				<a href="${pageContext.request.contextPath}/on/modifyActor?actorId=${actor.actorId}" class="btn btn-success" >actor 수정</a>
+				<a href="${pageContext.request.contextPath}/on/removeActor?actorId=${actor.actorId}" class="btn btn-danger" >actor 삭제</a>
 			</div>
 			<!-- actor file -->
 			<h2>ACTOR FILE</h2>

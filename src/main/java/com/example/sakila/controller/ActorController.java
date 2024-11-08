@@ -93,4 +93,20 @@ public class ActorController {
 		actorService.addActor(actorForm, path);
 		return "redirect:/on/actorList";
 	}
+	
+	// 배우 수정
+	@GetMapping("/on/modifyActor")
+	public String modifyActor(Model model,@RequestParam int actorId) {
+		Actor actor = actorService.getActorOne(actorId);
+		log.debug(actor.toString());
+		model.addAttribute("actor",actor);
+		return "on/modifyActor";
+	}
+	@PostMapping("/on/modifyActor")
+	public String modifyActor(Actor actor) {
+		log.debug(actor.toString());
+		actorService.modifyActor(actor);
+		return "redirect:/on/actorOne?actorId="+actor.getActorId();
+		
+	}
 }

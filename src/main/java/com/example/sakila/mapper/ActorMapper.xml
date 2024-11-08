@@ -60,4 +60,17 @@
 		on fa.actor_id = a.actor_id
 		where fa.film_id = #{filmId}
 	</select>
+	
+	<update id="updateActor" parameterType="com.example.sakila.vo.Actor">
+		update actor
+			<set>
+				<if test="firstName != null">
+					first_name = #{firstName}
+				</if>
+				<if test="lastName != null">
+					last_name = #{lastName}
+				</if>
+			</set>
+		where actor_id = #{actorId}	
+	</update>
 </mapper>
