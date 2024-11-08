@@ -109,4 +109,13 @@ public class ActorController {
 		return "redirect:/on/actorOne?actorId="+actor.getActorId();
 		
 	}
+	
+	// 배우 삭제
+	@GetMapping("/on/removeActor")
+	public String removeActor(HttpSession session, @RequestParam int actorId) {
+		String path = session.getServletContext().getRealPath("/upload/");
+		actorService.removeActor(actorId, null);
+		return "redirect:/on/actorList";
+	}
+	
 }

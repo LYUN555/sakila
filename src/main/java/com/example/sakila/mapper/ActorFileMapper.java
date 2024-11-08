@@ -18,4 +18,7 @@ public interface ActorFileMapper {
 	
 	// removeActorFile 삭제를 위한 actorFileOne
 	ActorFile selectActorFileOne(int actorFileId);
+	
+	// removeActor
+	int deleteActorFileByActor(int actorId);
 }

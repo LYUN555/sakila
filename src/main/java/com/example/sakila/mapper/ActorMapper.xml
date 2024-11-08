@@ -73,4 +73,11 @@
 			</set>
 		where actor_id = #{actorId}	
 	</update>
+	
+	<!-- actor삭제 -->
+	<delete id="deleteActor" parameterType="int">
+		delete
+		from actor
+		where actor_id = #{actorId}
+	</delete>
 </mapper>

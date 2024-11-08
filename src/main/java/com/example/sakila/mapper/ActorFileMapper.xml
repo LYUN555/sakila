@@ -41,4 +41,11 @@
 		from actor_file
 		where actor_file_id = #{actorFileId}
 	</select>
+	
+	<!-- 동일 actor 전체 파일삭제 -->
+	<delete id="deleteActorFileByActor" parameterType="int">
+		delete
+		from actor_file
+		where actor_id = #{actorId}
+	</delete>
 </mapper>
