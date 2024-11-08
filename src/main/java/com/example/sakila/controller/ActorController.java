@@ -33,13 +33,19 @@ public class ActorController {
 	
 	
 	@GetMapping("/on/actorOne")
-	public String actorOne(Model model, @RequestParam int actorId) {
+	public String actorOne(Model model, @RequestParam int actorId, @RequestParam(defaultValue = "") String searchTitle) {
 		Actor actor = actorService.getActorOne(actorId);
 		List<ActorFile> actorFileList = actorFileService.getActorFileListByActor(actorId);
 		List<Film> filmList = filmService.getFilmTitleListByActor(actorId);
 		log.debug(actor.toString());
 		log.debug(actorFileList.toString());
 		log.debug(filmList.toString());
+		
+		if(!searchTitle.equals("")) {
+			// film 검색 결과 리스트 추가
+			List<Film> searchFilmList = filmService.getFilmListByTitle(searchTitle);
+			model.addAttribute("searchFilmList",searchFilmList);
+		}
 		
 		model.addAttribute("actor",actor);
 		model.addAttribute("actorFileList",actorFileList);

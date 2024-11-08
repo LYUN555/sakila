@@ -20,7 +20,19 @@
 		<div class="col-sm-10">
 			<!-- main content -->
 			<h1>ACTOR ONE</h1>
-			<!-- actor -->
+			<!--
+				1) actor 상세 ㅇ
+				1-1) actor 수정 /on/modifyActor
+				1-2) actor 삭제 /on/removeActor (actor_file 삭제 + film_actor + actor 삭제)
+				
+				2) actor_file 리스트 ㅇ
+				2-1) actor_file 추가 o
+				2-2) actor_file 삭제 /on/removeFilmCategory
+				
+				3) film_actor 리스트 ㅇ
+				3-1) film_actor 추가 /on/addFilmByActor -> 액터 검색 후 선택 o
+				3-2) film_actor 삭제 /on/removeFilmActor
+			-->
 			<table class="table table-striped">
 				<tr>
 					<td>actorId</td>
@@ -60,7 +72,7 @@
 						<td>${af.type}</td>
 						<td>${af.size} byte</td>
 						<td>${af.createDate}</td>
-						<td><a href="" class="btn btn-danger">삭제</a></td>
+						<td><a href="${pageContext.request.contextPath}/on/removeActorFile?actorFileId=${af.actorFileId}&actorId=${actor.actorId}" class="btn btn-danger">삭제</a></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -70,15 +82,37 @@
 			<!-- film -->
 			<h2>출연 작품</h2>
 			<div>
+				<!-- 출연작 추가 -->
+				<form id="formSearchFilm" method="get" action="${pageContext.request.contextPath}/on/actorOne"> <!-- 영화 검색 -->
+					<!-- film 검색시 actorId 도 넘긴다 -->
+					<input type="hidden" name="actorId" value="${actor.actorId}">
+					<input type="text" name="searchTitle">
+					<button id="btnSearchFilm" type="button">영화 검색</button>
+				</form>
+				
+				<form id="formAddFilm" method="post" action="${pageContext.request.contextPath}/on/addFilmByActor">
+					<input type="hidden" name="actorId" value="${actor.actorId}">
+					<select size="5" name = "filmId" >
+						<c:forEach var="sf" items="${searchFilmList}">
+							<option value="${sf.filmId}">${sf.title}</option>
+						</c:forEach>
+					</select>
+					<button id="btnAddFilm" type="button">영화 추가</button>
+				</form>
+			</div>
+			<div>
 			    <table class="table table-striped">
-		            <c:forEach var="f" items="${filmList}">
-		                
+		            <c:forEach var="fl" items="${filmList}">
 		                <tr>
 		                    <td>
-		                        <a href="${pageContext.request.contextPath}/on/filmOne?filmId=${f.filmId}">
-		                            ${f.title}
-		                        </a>
+		                        <a href="${pageContext.request.contextPath}/on/filmOne?filmId=${fl.filmId}">
+		                            ${fl.title}
+		                        </a>&nbsp;
 		                    </td>
+		                    <td>
+		                        <a href="${pageContext.request.contextPath}/on/removeFilmActor?actorId=${actor.actorId}&filmId=${fl.filmId}" class="btn btn-danger">출연작품 삭제</a>
+		                		<!-- fileId & actorId 필요 -->
+		                	<td>
 		                </tr>
 		            </c:forEach>
 			    </table>
@@ -86,4 +120,15 @@
 		</div>
 	</div>
 </body>
+<script>
+	// film Title 검색
+	$('#btnSearchFilm').click(function() {
+		$('#formSearchFilm').submit();
+	});
+	
+	// 출연작(film) 추가
+	$('#btnAddFilm').click(function() {
+		$('#formAddFilm').submit();
+	});
+</script>
 </html>

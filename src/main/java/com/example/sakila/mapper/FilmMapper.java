@@ -15,4 +15,7 @@ public interface FilmMapper {
 	Map<String, Object> selectFilmOne(int filmId);
 	
 	int insertFilm(Film film);
+	
+	// actorOne 검색
+	List<Film> selectFilmListByTitle(String searchTitle);
 }

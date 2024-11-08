@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.sakila.mapper.FilmMapper">
+	
+	<!-- 배우의 영화 리스트 -->
 	<select id="selectFilmTitleListByActor" parameterType="int" resultType="com.example.sakila.vo.Film">
 		select 
 			f.film_id filmId
@@ -10,6 +12,7 @@
 		where fa.actor_id = #{actorId}
 	</select>
 	
+	<!-- 영화 정보 -->
 	<select id="selectFilmOne" parameterType="int" resultType="map">
 		select 
 			fi.film_id filmId,
@@ -29,7 +32,7 @@
 		on fi.language_id = la.language_id
 		where fi.film_id = #{filmId}
 	</select>
-	
+	<!-- 영화 추가 -->
 	<insert id="insertFilm" parameterType="com.example.sakila.vo.Film">
 		insert into film(
 			title,
@@ -57,4 +60,12 @@
 				#{specialFeatures}
 			)
 	</insert>
+	<!-- 영화 검색 -->
+	<select id="selectFilmListByTitle" parameterType="String" resultType="com.example.sakila.vo.Film">
+		select
+			film_id filmId,
+			title
+		from film
+		where title like concat('%', #{searchTitle}, '%')
+	</select>
 </mapper>

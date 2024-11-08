@@ -60,4 +60,8 @@ public class FilmService {
 		log.debug(film.toString());
 		return filmMapper.insertFilm(film);
 	}
+	
+	public List<Film> getFilmListByTitle(String searchTitle){
+		return filmMapper.selectFilmListByTitle(searchTitle);
+	}
 }
