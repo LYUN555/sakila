@@ -9,4 +9,13 @@
 			last_update lastUpdate
 		from language
 	</select>
+	
+	<!-- insert Language -->
+	<insert id="insertLanguage" parameterType="String">
+		insert into language(
+			name
+		)values(
+			#{name}
+		)
+	</insert>
 </mapper>

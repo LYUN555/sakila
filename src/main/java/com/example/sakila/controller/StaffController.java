@@ -55,7 +55,7 @@ public class StaffController {
 	public String addStaff(Model model, @RequestParam(defaultValue = "")String searchAddress) {
 		// model(storeList)
 		log.debug("searchAddress :", searchAddress);
-		List<Store> storeList = storeService.getStoreList();
+		List<Map<String, Object>> storeList = storeService.getStoreList();
 		model.addAttribute("storeList",storeList);
 		// model(addressList) <- 검색후 공백이 아니면
 		if(!searchAddress.equals("")) {
@@ -67,7 +67,7 @@ public class StaffController {
 	}
 	
 	@PostMapping("/on/addStaff")
-	public String addStaff2(Staff staff) { 
+	public String addStaff(Staff staff) { 
 		// 커맨드 객체 생성 -> 커맨드객체.set(request.getParameter())
 		// insert 호출
 		log.debug(staff.toString());
@@ -90,11 +90,9 @@ public class StaffController {
 		
 		List<Staff> staffList = staffService.getStaffList();
 		log.debug(staffList.toString());
-		int lastPage = staffService.getLastPage(rowPerPage);
 		
 		model.addAttribute("staffList",staffList);
 		model.addAttribute("currentPage",currentPage);
-		model.addAttribute("lastPage",lastPage);
 		
 		
 		return "on/staffList";

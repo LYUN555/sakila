@@ -35,7 +35,7 @@
 				</select>
 			</form>
 			<br>
-			<table class= "table table-striped"">
+			<table class= "table table-striped">
 				<tr>
 					<td>filmId</td>
 					<td>title</td>

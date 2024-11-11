@@ -20,9 +20,12 @@
 			 -->
 		</li>
 		<li class="list-group-item">
-			<a href="${pageContext.request.contextPath}/on/addStroe">지점 추가</a>
+			<a href="${pageContext.request.contextPath}/on/addStore">지점 추가</a>
 			<!--
-				GET - /on/addStore - StoreController.addStor() : staffList 모델추가, search주소검색결과 모델추가 - addStore.jsp
+				GET - /on/addStore - StoreController.addStor() : 
+				staffList 모델추가,
+				search주소검색결과 모델추가 - addStore.jsp
+				
 				StoreMapper.insertStore(): Integer
 				StoreService.addStore() : Integer
 				

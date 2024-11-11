@@ -8,6 +8,10 @@ import com.example.sakila.vo.Language;
 
 @Mapper
 public interface LanguageMapper {
-	//addFilm
+	// /on/addFilm
 	List<Language> selectLanguageList();
+	
+	// addLanguage
+	int insertLanguage(String name);
+	
 }

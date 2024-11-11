@@ -32,15 +32,6 @@ public class StaffService {
 		return staffMapper.selectStaffList();
 	}
 	
-	public int getLastPage(int rowPerPage) {
-		int count = staffMapper.selectStaffCount();
-		int lastPage = count/rowPerPage;
-		if(count % rowPerPage != 0) {
-			lastPage++;
-		}
-		return lastPage;
-	}
-	
 	public Map<String, Object> getStaffOne(int staffId){
 		return staffMapper.selectStaffOne(staffId);
 	}
