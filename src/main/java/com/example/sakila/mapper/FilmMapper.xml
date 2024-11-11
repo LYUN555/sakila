@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.sakila.mapper.FilmMapper">
 	
-	<!-- 배우의 영화 리스트 -->
+	<!-- 배우의 영화 출연 리스트 -->
 	<select id="selectFilmTitleListByActor" parameterType="int" resultType="com.example.sakila.vo.Film">
 		select 
 			f.film_id filmId
@@ -67,5 +67,40 @@
 			title
 		from film
 		where title like concat('%', #{searchTitle}, '%')
+	</select>
+	
+	<!-- 영화 리스트(category null 이거나 0 일때) -->
+	<select id="selectFilmList" parameterType="Map" resultType="Map">
+		select 
+			film_id filmId,
+		    title,
+			release_year releaseYear,
+			rental_duration rentalDuration,
+		    rental_rate rentalRate, 
+		    length,
+		    replacement_cost replacementCost,
+		    rating
+		from film
+		order by film_id desc
+		limit #{beginRow} , #{rowPerPage}
+	</select>
+	
+	<!-- 영화 리스트 (categoryId 가 null이거나 0이 아닐떄) -->
+	<select id="selectFilmListByCategory" parameterType="Map" resultType="Map">
+		select
+			f.film_id filmId,
+		    f.title title,
+			f.release_year releaseYear,
+			f.rental_duration rentalDuration,
+		    f.rental_rate rentalRate, 
+		    f.length length,
+		    f.replacement_cost replacementCost,
+		    f.rating rating,
+		    fc.category_id categoryId
+		from film f inner join film_category fc
+		on f.film_id = fc.film_id
+		where fc.category_id = #{categoryId}
+		order by f.film_id desc
+		limit #{beginRow} , #{rowPerPage}
 	</select>
 </mapper>

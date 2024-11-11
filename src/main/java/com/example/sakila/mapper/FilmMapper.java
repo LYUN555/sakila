@@ -18,4 +18,11 @@ public interface FilmMapper {
 	
 	// actorOne 검색
 	List<Film> selectFilmListByTitle(String searchTitle);
+	
+	// category null 이거나 0 일때
+	List<Map<String,Object>> selectFilmList(Map<String,Object> paramMap);
+	
+	
+	// categoryId 가 null이거나 0이 아닐떄
+	List<Map<String,Object>> selectFilmListByCategory(Map<String,Object> paramMap);
 }

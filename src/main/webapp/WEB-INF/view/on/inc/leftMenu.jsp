@@ -26,7 +26,7 @@
 		</li>
 		<hr> ::: 영화 관리 :::<hr>		
 		<li class="list-group-item">
-			<a href="${pageContext.request.contextPath}/on/">영화 리스트</a>
+			<a href="${pageContext.request.contextPath}/on/filmList">영화 리스트</a>
 		</li>
 		<li class="list-group-item">
 			<a href="${pageContext.request.contextPath}/on/addFilm">영화 추가</a>

@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.sakila.service.ActorService;
+import com.example.sakila.service.CategoryService;
 import com.example.sakila.service.FilmService;
 import com.example.sakila.service.LanguageService;
 import com.example.sakila.vo.Actor;
+import com.example.sakila.vo.Category;
 import com.example.sakila.vo.FilmForm;
 import com.example.sakila.vo.Language;
 
@@ -28,6 +30,8 @@ public class FilmController {
 	private ActorService actorService;
 	@Autowired
 	private LanguageService languageService;
+	@Autowired
+	private CategoryService categoryService;
 	
 	@GetMapping("/on/filmOne")
 	public String filmOne(Model model, @RequestParam int filmId) {
@@ -55,5 +59,21 @@ public class FilmController {
 		// filmService : filmForm -< film
 		filmService.addFilm(filmForm);
 		return "redirect:/on/filmList";
+	}
+	
+	@GetMapping("/on/filmList")
+	public String filmList(Model model, @RequestParam(required = false) Integer categoryId, @RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "10") int rowPerPage) {
+		log.debug("categoryId : "+categoryId);
+		List<Map<String, Object>> filmList = filmService.getFilmList(categoryId, currentPage, rowPerPage);
+		log.debug("filmList : "+filmList);
+		List<Category> categoryList = categoryService.getCategoryList();
+		log.debug("categoryList : "+categoryList);
+		
+		model.addAttribute("filmList", filmList);
+		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("currentCategoryId", categoryId);
+		
+		return "on/filmList";
 	}
 }

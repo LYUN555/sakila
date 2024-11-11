@@ -1,5 +1,6 @@
 package com.example.sakila.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -63,5 +64,22 @@ public class FilmService {
 	
 	public List<Film> getFilmListByTitle(String searchTitle){
 		return filmMapper.selectFilmListByTitle(searchTitle);
+	}
+	
+	public List<Map<String,Object>> getFilmList(Integer categoryId, int currentPage, int rowPerPage){
+		Map<String, Object> paramMap = new HashMap<>();
+		if(categoryId == null || categoryId == 0) {
+			paramMap.put("categoryId", null);
+		} else {
+			paramMap.put("categoryId", categoryId);
+		}
+		int beginRow = (currentPage-1) * rowPerPage;
+		paramMap.put("beginRow", beginRow);
+		paramMap.put("rowPerPage", rowPerPage);
+		if(paramMap.get("categoryId") == null) {
+			return filmMapper.selectFilmList(paramMap);
+		} else {
+			return filmMapper.selectFilmListByCategory(paramMap);
+		}
 	}
 }

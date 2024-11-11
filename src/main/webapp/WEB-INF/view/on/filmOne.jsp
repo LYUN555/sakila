@@ -19,7 +19,7 @@
 			<!--
 				1) film 상세 ㅇ
 				1-1) film 수정 /on/modifyActor
-				1-2) film 삭제 /on/removeActor (film_category 삭제 + film_actor + actor 삭제)
+				1-2) film 삭제 /on/removeActor (inventory rental 정보 확인 + film_category 삭제 + film_actor + film 삭제)
 				
 				2) film_category 리스트
 				2-1) film_category 추가
@@ -28,6 +28,9 @@
 				3) film_actor 리스트 ㅇ
 				3-1) film_actor 추가 /on/addFilmActorByActor -> 검색후 선택 
 				3-2) film_actor 삭제 /on/removeFilmActor
+				
+				4) inventory 정보
+				
 			-->
 		<div class="col-sm-10">
 			<!-- main content -->
