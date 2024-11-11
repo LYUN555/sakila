@@ -88,7 +88,7 @@ public class StaffController {
 		map.put("rowPerPage", rowPerPage);
 		log.debug(map.toString());
 		
-		List<Staff> staffList = staffService.getStaffList(map);
+		List<Staff> staffList = staffService.getStaffList();
 		log.debug(staffList.toString());
 		int lastPage = staffService.getLastPage(rowPerPage);
 		

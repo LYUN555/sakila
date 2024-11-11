@@ -14,7 +14,7 @@ public interface StaffMapper {
 	
 	int selectStaffCount();
 	
-	List<Staff> selectStaffList(Map<String, Object> map);
+	List<Staff> selectStaffList();
 	
 	int insertStaff(Staff staff);
 	

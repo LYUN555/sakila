@@ -49,7 +49,11 @@
 				<c:forEach var="f" items="${filmList}">
 					<tr>
 						<td>${f.filmId}</td>
-						<td>${f.title}</td>
+						<td>
+							<a href="${pageContext.request.contextPath}/on/filmOne?filmId=${f.filmId}">
+								${f.title}
+							</a>
+						</td>
 						<td>${f.releaseYear}</td>
 						<td>${f.rentalDuration}</td>
 						<td>${f.rentalRate}</td>
@@ -59,6 +63,44 @@
 					</tr>
 				</c:forEach>
 			</table>
+		<div>
+			<nav aria-label="Page navigation">
+			    <ul class="pagination justify-content-center">
+			    
+			        <li class="page-item">
+			            <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=1&categoryId=${currentCategoryId}">첫 페이지</a>
+			        </li>
+			        
+			        <c:if test="${currentPage > 1}">
+			            <li class="page-item">
+			                <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=${currentPage-1}&categoryId=${currentCategoryId}">이전</a>
+			            </li>
+			        </c:if>
+			        <c:if test="${currentPage <= 1}">
+			            <li class="page-item disabled">
+			                <a class="page-link" href="#">이전</a>
+			            </li>
+			        </c:if>
+					<li class="page-item">
+		                <span class="page-link">${currentPage}</span>
+		            </li>
+			        <c:if test="${currentPage < lastPage}">
+			            <li class="page-item">
+			                <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=${currentPage+1}&categoryId=${currentCategoryId}">다음</a>
+			            </li>
+			        </c:if>
+			        <c:if test="${currentPage >= lastPage}">
+			            <li class="page-item disabled">
+			                <a class="page-link" href="#">다음</a>
+			            </li>
+			        </c:if>
+			
+			        <li class="page-item">
+			            <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=${lastPage}&categoryId=${currentCategoryId}">마지막</a>
+			        </li>
+			    </ul>
+			</nav>
+		</div>
 		</div>
 	</div>
 </body>

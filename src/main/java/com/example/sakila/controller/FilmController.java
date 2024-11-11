@@ -68,11 +68,16 @@ public class FilmController {
 		log.debug("filmList : "+filmList);
 		List<Category> categoryList = categoryService.getCategoryList();
 		log.debug("categoryList : "+categoryList);
-		
+		int lastPage = filmService.getTotalCount(categoryId, rowPerPage);
+		log.debug("currentPage : "+currentPage);
+		log.debug("rowPerPage : "+rowPerPage);
+		log.debug("lastPage : "+lastPage);
+		log.debug("categoryId : "+categoryId);
 		model.addAttribute("filmList", filmList);
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("currentCategoryId", categoryId);
+		model.addAttribute("lastPage", lastPage);
 		
 		return "on/filmList";
 	}

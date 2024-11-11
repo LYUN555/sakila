@@ -28,8 +28,8 @@ public class StaffService {
 		return staffMapper.insertStaff(paramStaff);
 	}
 
-	public List<Staff> getStaffList(Map paramMap){
-		return staffMapper.selectStaffList(paramMap);
+	public List<Staff> getStaffList( ){
+		return staffMapper.selectStaffList();
 	}
 	
 	public int getLastPage(int rowPerPage) {

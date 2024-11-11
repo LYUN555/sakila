@@ -25,15 +25,8 @@
 	       where staff_id = #{staffId}
 	</update>
 	
-	<!-- 스태프리스트 페이징 -->
-	<select id="selectStaffCount"
-			resultType="int">
-			select count(*) from staff
-	</select>
-	
-	
 	<!-- 스태프 리스트 -->
-	<select id="selectStaffList" parameterType="Map" resultType="com.example.sakila.vo.Staff">
+	<select id="selectStaffList" resultType="com.example.sakila.vo.Staff">
 			select
 				staff_id staffId
 				, first_name firstName
@@ -46,8 +39,6 @@
 				, last_update lastUpdate
 			from staff
 			order by staff_id
-			limit #{beginRow}, #{rowPerPage}
-				
 	</select>
 	
 	<!-- 스태프 추가 -->
