@@ -10,12 +10,12 @@ public class FilmForm {
 	private String title;
 	private String description; // null 
 	private Integer releaseYear; // null
-	private int languageId;
+	private Integer languageId;
 	private Integer originalLanguageId; // null
-	private int rentalDuration;
-	private double rentalRate;
+	private Integer rentalDuration;
+	private Double rentalRate;
 	private Integer length; // null
-	private double replacementCost;
+	private Double replacementCost;
 	private String rating;
 	private List<String> specialFeatures;
 	//private String[] specialFeatures;

@@ -57,7 +57,6 @@ public class FilmController {
 		 * 5) 현재필름의 배우 리스트
 		 * */
 		
-		
 		// 1)
 		Map<String, Object> film = filmService.getFilmOne(filmId);
 		log.debug("film :" + film.toString());
@@ -73,7 +72,7 @@ public class FilmController {
 		model.addAttribute("film",film); // 1
 		model.addAttribute("allCategoryList",allCategoryList); // 2
 		model.addAttribute("filmCategoryList",filmCategoryList); // 3
-		model.addAttribute("actorList", actorList);
+		model.addAttribute("actorList", actorList); // 5
 		return "on/filmOne";
 	}
 	
@@ -134,7 +133,7 @@ public class FilmController {
 		return "redirect:/on/filmOne?filmId="+filmId+"&removeFilmMsg="+removeFilmMsg;
 	}
 	
-	// 영화 수정
+	// 영화 수정 get
 	@GetMapping("/on/modifyFilm")
 	public String modifyFilm(Model model, @RequestParam Integer filmId) {
 		log.debug("filmId : "+filmId);
@@ -152,10 +151,10 @@ public class FilmController {
 		// specialFeatures 값들 불러오기
 		String specialFeatures = (String) film.get("specialFeatures");
 		if(specialFeatures != null) {
+			// 쉼표 기준으로 나눔
 			List<String> specialFeature = Arrays.asList(specialFeatures.split(","));
 			model.addAttribute("specialFeature",specialFeature);
 		}
-		// 쉼표 기준으로 나눔
 		log.debug("film : "+film);
 		// languageList
 		List<Language> languageList = languageService.getLanguageList();
@@ -166,6 +165,7 @@ public class FilmController {
 		model.addAttribute("film",film);
 		return "on/modifyFilm";
 	}
+	// 영화 수정 post
 	@PostMapping("/on/modifyFilm")
 	public String modifyFilm(FilmForm filmForm) {
 		log.debug("filmForm:"+filmForm.toString());
