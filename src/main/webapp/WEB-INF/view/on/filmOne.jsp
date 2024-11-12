@@ -73,7 +73,8 @@
 			</table>
 			<div>
 				<a href="" class="btn btn-success">영화 수정</a>			
-				<a href="" class="btn btn-danger">영화 삭제</a><!--  -->			
+				<a href="${pageContext.request.contextPath}/on/removeFilm?filmId=${film.filmId}" class="btn btn-danger">영화 삭제</a><!--  -->			
+				<span class = "text text-danger">${param.removeFilmMsg}</span>
 			</div>
 			<hr>
 			<h2>작품에 출연한 배우</h2>

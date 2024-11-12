@@ -1,5 +1,7 @@
 package com.example.sakila.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.sakila.service.ActorService;
 import com.example.sakila.service.CategoryService;
 import com.example.sakila.service.FilmService;
+import com.example.sakila.service.InventoryService;
 import com.example.sakila.service.LanguageService;
 import com.example.sakila.vo.Actor;
 import com.example.sakila.vo.Category;
@@ -32,6 +35,9 @@ public class FilmController {
 	private LanguageService languageService;
 	@Autowired
 	private CategoryService categoryService;
+	@Autowired
+	private InventoryService inventoryService;
+	
 	
 	@GetMapping("/on/filmOne")
 	public String filmOne(Model model, @RequestParam int filmId) {
@@ -80,5 +86,26 @@ public class FilmController {
 		model.addAttribute("lastPage", lastPage);
 		
 		return "on/filmList";
+	}
+	
+	@GetMapping("/on/removeFilm")
+	public String removeFilm(Model model, @RequestParam Integer filmId) {
+		
+		Integer count = inventoryService.getCountInventoryByFilm(filmId);
+		if(count == 0 ) {
+			Integer row = filmService.removeFilmByKey(filmId);
+			if(row == 0 ) { // 삭제 실패시
+				return "on/filmOne";
+			}
+			return "redirect:/on/filmList";
+		}
+		// 삭제 실패시 오류 메세지 넘기기
+		String removeFilmMsg = "film이 인벤토리에 존재합니다";
+		try {
+			removeFilmMsg = URLEncoder.encode(removeFilmMsg, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return "redirect:/on/filmOne?filmId="+filmId+"&removeFilmMsg="+removeFilmMsg;
 	}
 }

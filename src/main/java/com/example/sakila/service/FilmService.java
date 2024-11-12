@@ -97,4 +97,9 @@ public class FilmService {
 		}
 		return lastPage;
 	}
+	
+	// 필름 삭제
+	public Integer removeFilmByKey(Integer filmId) {
+		return filmMapper.deleteFilmByKey(filmId);
+	}
 }

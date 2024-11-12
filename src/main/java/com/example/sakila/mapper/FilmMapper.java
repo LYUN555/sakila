@@ -26,5 +26,7 @@ public interface FilmMapper {
 	// categoryId 가 null이거나 0이 아닐떄
 	List<Map<String,Object>> selectFilmListByCategory(Map<String,Object> paramMap);
 	int selectFilmCountByCategory(Integer categoryId);
+	
+	Integer deleteFilmByKey(Integer filmId);
 
 }
