@@ -17,4 +17,5 @@ public class Film {
 	private String rating;
 	private String specialFeatures; // null
 	private String lastUpdate;
+	
 }

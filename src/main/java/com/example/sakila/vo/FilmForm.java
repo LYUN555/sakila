@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class FilmForm {
+	private Integer filmId;
 	private String title;
 	private String description; // null 
 	private Integer releaseYear; // null

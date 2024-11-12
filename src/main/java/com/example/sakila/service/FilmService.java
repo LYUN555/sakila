@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.sakila.mapper.FilmActorMapper;
+import com.example.sakila.mapper.FilmCategoryMapper;
 import com.example.sakila.mapper.FilmMapper;
 import com.example.sakila.vo.Film;
 import com.example.sakila.vo.FilmForm;
@@ -21,6 +23,10 @@ public class FilmService {
 	
 	@Autowired
 	private FilmMapper filmMapper;
+	@Autowired
+	private FilmActorMapper filmActorMapper;
+	@Autowired
+	private FilmCategoryMapper filmCategoryMapper;
 	
 	// /on/actorOne
 	public List<Film> getFilmTitleListByActor(int actorId) {
@@ -99,7 +105,48 @@ public class FilmService {
 	}
 	
 	// 필름 삭제
-	public Integer removeFilmByKey(Integer filmId) {
-		return filmMapper.deleteFilmByKey(filmId);
+	public void removeFilmByKey(Integer filmId) {
+		// 필름 카테고리 삭제
+		filmCategoryMapper.deleteFilmCategoryByCategory(filmId);
+		// 필름 배우 삭제
+		filmActorMapper.deleteFilmActorByFilm(filmId);
+		// 필름 삭제
+		filmMapper.deleteFilmByKey(filmId);
+		
 	}
+	
+	// 필름 수정
+	public int modifyFilm(FilmForm filmForm) {
+		Film film = new Film();
+		// filmForm --> film
+		film.setFilmId(filmForm.getFilmId());
+		film.setTitle(filmForm.getTitle());
+		if(filmForm.getDescription().equals("")){
+			film.setDescription(null);
+		} else {
+			film.setDescription(filmForm.getDescription());
+		}
+		film.setReleaseYear(filmForm.getReleaseYear());
+		film.setLanguageId(filmForm.getLanguageId());
+		film.setOriginalLanguageId(filmForm.getOriginalLanguageId());
+		film.setRentalDuration(filmForm.getRentalDuration());
+		film.setRentalRate(filmForm.getRentalRate());
+		film.setLength(filmForm.getLength());
+		film.setReplacementCost(filmForm.getReplacementCost());
+		film.setRating(filmForm.getRating());
+		if(filmForm.getSpecialFeatures() == null) {
+			film.setSpecialFeatures(null);
+		} else {
+			// specialFeatures 배열 -> 문자열
+			String specialFeatures = filmForm.getSpecialFeatures().get(0);
+			for(int i = 1; filmForm.getSpecialFeatures().size()>i ; i++) {
+				specialFeatures += ","+filmForm.getSpecialFeatures().get(i);
+			}
+			film.setSpecialFeatures(specialFeatures);
+		}
+		log.debug(film.toString());
+		
+		return filmMapper.updateFilm(film);
+	}
+
 }

@@ -12,7 +12,7 @@
 		where fa.actor_id = #{actorId}
 	</select>
 	
-	<!-- 영화 정보 -->
+	<!-- 영화 정보출력 /(modifyForm 에서도 사용가능)-->
 	<select id="selectFilmOne" parameterType="int" resultType="map">
 		select 
 			fi.film_id filmId,
@@ -27,9 +27,12 @@
 			fi.special_features specialFeatures,
 			fi.last_update lastUpdate,
 			fi.original_language_id originLanguageId,
-			la.name language
+			la.name language,
+			la.language_id languageId,
+			ol.name originLanguage
 		from film fi inner join language la
-		on fi.language_id = la.language_id
+		on fi.language_id = la.language_id left join language ol
+		on fi.original_language_id = ol.language_id
 		where fi.film_id = #{filmId}
 	</select>
 	<!-- 영화 추가 -->
@@ -121,4 +124,45 @@
 		delete from film
 		where film_id = #{filmId}
 	</delete>
+	
+	<!-- post : /on/modifyFIlm -->
+	<update id="updateFilm" parameterType="com.example.sakila.vo.Film">
+		update film
+		<set>
+			<if test="title != null">
+				title = #{title},
+			</if>
+			<if test="description != null">
+				description = #{description},
+			</if>
+			<if test="releaseYear != null">
+				release_year = #{releaseYear},
+			</if>
+			<if test="languageId != null">
+				language_id = #{languageId},
+			</if>
+			<if test="originalLanguageId != null">
+				original_language_id = #{originalLanguageId},
+			</if>
+			<if test="rentalDuration != null">
+				rental_duration = #{rentalDuration},
+			</if>
+			<if test="rentalRate != null">
+				rental_rate = #{rentalRate},
+			</if>
+			<if test="length != null">
+				length = #{length},
+			</if>
+			<if test="replacementCost != null">
+				replacement_cost = #{replacementCost},
+			</if>
+			<if test="rating != null">
+				rating = #{rating},
+			</if>
+			<if test="specialFeatures != null">
+				special_features = #{specialFeatures}
+			</if>
+		</set>
+		where film_id = #{filmId}
+	</update>
 </mapper>

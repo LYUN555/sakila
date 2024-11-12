@@ -28,5 +28,7 @@ public interface FilmMapper {
 	int selectFilmCountByCategory(Integer categoryId);
 	
 	Integer deleteFilmByKey(Integer filmId);
+	
+	Integer updateFilm(Film film);
 
 }

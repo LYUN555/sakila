@@ -13,7 +13,7 @@
 		)
 	</insert>
 	
-	<!-- 영화 안에 배우삭제 -->
+	<!-- 영화 안에 선택한 배우 한명 삭제 -->
 	<delete id="deleteFilmActor" parameterType="com.example.sakila.vo.FilmActor">
 		delete 
 		from film_actor
@@ -34,4 +34,11 @@
 		from film_actor
 		where actor_id = #{actorId} and film_id = #{filmId}
 	</select>
+	
+	<!-- 영화 안에 배우 전부 전체 삭제 -->
+	<delete id="deleteFilmActorByFilm">
+		delete
+		from film_actor
+		where film_id = #{filmId}
+	</delete>
 </mapper>

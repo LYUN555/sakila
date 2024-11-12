@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body class="container-flud">
+<body class="container-fluid">
 	<div class="row">
 		<div class="col-sm-2 bg-light">
 			<!-- leftMenu.jsp include -->

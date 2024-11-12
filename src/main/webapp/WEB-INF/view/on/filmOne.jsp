@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body class="container-flud">
+<body class="container-fluid">
 	<div class="row">
 		<div class="col-sm-2 bg-light">
 			<!-- leftMenu.jsp include -->
@@ -66,19 +66,60 @@
 			            <td>${film.language}</td>
 			        </tr>
 			        <tr>
+			            <td><strong>오리지널 언어:</strong></td>
+			            <td>${film.originLanguage}</td>
+			        </tr>
+			        <tr>
 			            <td><strong>특별 기능:</strong></td>
 			            <td>${film.specialFeatures}</td>
 			        </tr>
 			    </tbody>
 			</table>
 			<div>
-				<a href="" class="btn btn-success">영화 수정</a>			
+				<a href="${pageContext.request.contextPath}/on/modifyFilm?filmId=${film.filmId}" class="btn btn-success">영화 수정</a>			
 				<a href="${pageContext.request.contextPath}/on/removeFilm?filmId=${film.filmId}" class="btn btn-danger">영화 삭제</a><!--  -->			
 				<span class = "text text-danger">${param.removeFilmMsg}</span>
 			</div>
 			<hr>
+			<div>
+				<h2>작품 장르(CATEGORY)</h2>
+				<!-- 이 영화 카테고리 추가 -->
+				<form method="post" action="">
+					<select name="categoryId" id="categoryId">
+						<option value="">카테고리 선택</option>
+						<!--  model.allCategoryList -->
+						<c:forEach var="ac" items="${allCategoryList}">
+							<option value="${ac.categoryId}">${ac.name}</option>
+						</c:forEach>
+						
+					</select>
+					<button type="button">현재영화 카테고리추가</button>
+				</form>
+				<!-- 카테고리 리스트(model.filmCategoryList) -->
+				<div>
+					<c:forEach var="fc" items="${filmCategoryList}">
+						${fc.name}
+						&nbsp;
+						<a href="">삭제</a>
+					</c:forEach>
+				</div>
+			</div>
 			<h2>작품에 출연한 배우</h2>
 			<div>
+				<!-- 배우이름 검색 -->
+				<form action="">
+					<input type="text" name="searchName">
+					<button type="button">배우검색</button>
+				</form>
+				<!-- 배우추가 -->
+				<form method="post" action="">
+					<select name="actorId" id="actorId">
+						<option value="" size="5">배우 선택</option>
+						<!--  model.actorList -->
+						
+					</select>
+					<button type="button">출연 배우추가</button>
+				</form>
 				<table class="table table-striped">
                     <thead>
                         <tr>
@@ -93,6 +134,12 @@
                                         ${a.firstName} ${a.lastName}
                                     </a>
                                 </td>
+                                <td>
+                                    <a href="${pageContext.request.contextPath}/on/actorOne?actorId=${a.actorId}">
+                                        삭제
+                                    </a>
+                                </td>
+                                
                             </tr>
                         </c:forEach>
                     </tbody>

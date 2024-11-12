@@ -15,4 +15,6 @@ public interface FilmActorMapper {
 	
 	// 배우 영화 추가시 중복검사
 	int countFilmActor(FilmActor filmActor);
+
+	int deleteFilmActorByFilm(int filmId);
 }
