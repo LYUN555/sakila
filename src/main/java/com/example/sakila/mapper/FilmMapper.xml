@@ -160,7 +160,7 @@
 				rating = #{rating},
 			</if>
 			<if test="specialFeatures != null">
-				special_features = #{specialFeatures}
+				special_features = #{specialFeatures},
 			</if>
 		</set>
 		where film_id = #{filmId}

@@ -123,7 +123,7 @@
 						</td>
 					</tr>	
 				</table>
-				<button id="btnModifyFilm" type="button">영화수정</button>
+				<button id="btnModifyFilm" type="button" class="btn btn-success">영화수정</button>
 			</form>
 		</div>
 	</div>

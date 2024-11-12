@@ -97,11 +97,18 @@
 				</form>
 				<!-- 카테고리 리스트(model.filmCategoryList) -->
 				<div>
-					<c:forEach var="fc" items="${filmCategoryList}">
-						${fc.name}
-						&nbsp;
-						<a href="">삭제</a>
-					</c:forEach>
+					<table class="table table-bordered">
+						<c:forEach var="fc" items="${filmCategoryList}">
+							<tr>
+								<td>
+								${fc.name}
+								</td>
+								<td>
+								<a href="" class="btn btn-danger">삭제</a>
+								</td>
+							</tr>
+						</c:forEach>
+					</table>
 				</div>
 			</div>
 			<h2>작품에 출연한 배우</h2>
@@ -135,7 +142,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="${pageContext.request.contextPath}/on/actorOne?actorId=${a.actorId}">
+                                    <a href="${pageContext.request.contextPath}/on/actorOne?actorId=${a.actorId}" class="btn btn-danger">
                                         삭제
                                     </a>
                                 </td>
