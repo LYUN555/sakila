@@ -35,6 +35,17 @@
 						<td>${iv.lastUpdate}</td>
 				</c:forEach>
 			</table>
+		<div>
+			<c:if test="${currentPage<10}">
+				<a href="#">이전</a>
+			</c:if>
+			<c:if test="${currentPage>10}">
+				<a href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${currentPage-9}">이전</a>
+			</c:if>
+			<c:forEach var="i" begin="${currentPage}" end="">
+			
+			</c:forEach>
+		</div>
 		</div>
 	</div>
 </body>

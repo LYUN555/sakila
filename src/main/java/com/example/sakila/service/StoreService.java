@@ -26,4 +26,15 @@ public class StoreService {
 	public int addStore(Store store) {
 		return storeMapper.insertStore(store);
 	}
+
+	public boolean checkManagerExists(Store store) {
+		boolean check = false;
+		
+		int count = storeMapper.countByStaffManager(store);
+		if(count>0) {
+			check = true;
+		}
+		return check;
+		
+	}
 }

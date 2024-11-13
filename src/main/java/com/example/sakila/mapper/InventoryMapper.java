@@ -13,4 +13,7 @@ public interface InventoryMapper {
 	
 	// inventoryList
 	List<Map<String,Object>> selectInventoryListByStore(Map<String,Object> paramMap);
+	
+	// 리스트 갯수
+	Integer selectInventoryTotalRowBystoreId(Integer storeId);
 }

@@ -53,11 +53,17 @@ public class StoreController {
 	@PostMapping("/on/addStore")
 	public String addStore(Store store) {
 		log.debug(store.toString());
-		int row = storeService.addStore(store);
-		if(row == 0) {
-			return "on/addStore";
+		// 매니저스태프 중복체크
+		boolean checkManagerExists = storeService.checkManagerExists(store);
+		if(checkManagerExists) { // 중복이 없을시
+			int row = storeService.addStore(store);
+			if(row == 0) { //추가 실패
+				return "on/addStore";
+			}
+			// 추가 성공후 리스트로
+			return "on/storeList";
 		}
-		return "on/storeList";
+		return "on/addStore";
 	}
 	
 }

@@ -51,7 +51,7 @@
 							<select id="managerStaffId" name="managerStaffId" >
 							<option value="">:::선택:::</option>
 								<c:forEach items="${storeList}" var="s">
-									<option value="${s.staffId}">${s.staffId}</option>
+									<option value="${s.managerStaffId}">${s.managerStaffId}</option>
 								</c:forEach>
 							</select>
 						</td>

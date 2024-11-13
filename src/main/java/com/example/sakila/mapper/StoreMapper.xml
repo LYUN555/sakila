@@ -5,21 +5,17 @@
 	<!-- store 상세정보 -->
 	<select id="selectStoreList" parameterType="Map">
 			select
-			    t.store_id storeId,
-			    t.manager_staff_id managerStaffId,
-			    t.address_id addressId,
+			    s.store_id storeId,
+			    s.manager_staff_id managerStaffId,
+			    s.address_id addressId,
 			    a.address address,
 			    a.district district,
 			    a.city_id cityId,
 			    a.postal_code postalCode,
 			    a.phone phone
 			from address a 
-			inner join (select 
-			            store_id,
-			            manager_staff_id,
-			            address_id
-			           from store) t 
-			on a.address_id = t.address_id;
+			inner join store s
+			on a.address_id = s.address_id
 	</select>
 	
 	<insert id="insertStore" parameterType="com.example.sakila.vo.Store" useGeneratedKeys="true" keyProperty="storeId">
@@ -30,4 +26,10 @@
 			#{managerStaffId}, #{addressId}
 		)
 	</insert>
+	
+	<select id="countByStaffManager" parameterType="com.example.sakila.vo.Store">
+		select count(*)
+		from store
+		where store_id = #{storeId} and manager_staff_id=#{managerStaffId}
+	</select>
 </mapper>

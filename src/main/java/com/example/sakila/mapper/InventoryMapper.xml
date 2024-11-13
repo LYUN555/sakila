@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.sakila.mapper.InventoryMapper">
-	<!--  on/removeFilm  -->
+	<!--  on/removeFilm 영화 삭제시 인벤토리에서도 삭제  -->
 	<select id="selectCountInventoryByFilm" parameterType="Integer">
 		select count(*)
 		from inventory
@@ -19,5 +19,12 @@
 		on i.film_id = f.film_id
 		where i.store_id = #{storeId}
 		limit #{beginRow},#{rowPerPage}
+	</select>
+	
+	<!-- inventoryTotalRowBystoreId -->
+	<select id="selectInventoryTotalRowBystoreId" parameterType="Integer">
+		select count(*)
+		from inventory
+		where store_id = #{storeId};
 	</select>
 </mapper>

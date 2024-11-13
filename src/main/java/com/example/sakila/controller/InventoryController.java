@@ -23,6 +23,14 @@ public class InventoryController {
 	@GetMapping("/on/inventoryList")
 	public String inventoryList(Model model, @RequestParam Integer storeId, @RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "10") int rowPerPage) {
 		List<Map<String, Object>> inventoryList = inventoryService.getInventoryListByStore(storeId, currentPage, rowPerPage);
+		int totalRow = inventoryService.getTotalRow(storeId);
+		int lastPage = totalRow / rowPerPage;
+		if(totalRow % rowPerPage != 0) {
+			lastPage++;
+		}
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("rowPerPage",rowPerPage);
+		model.addAttribute("lastPage",lastPage);
 		model.addAttribute("inventoryList",inventoryList);
 		model.addAttribute("storeId",storeId);
 		return "on/inventoryList";

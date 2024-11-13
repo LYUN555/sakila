@@ -9,7 +9,10 @@ import com.example.sakila.vo.Store;
 
 @Mapper
 public interface StoreMapper {
+	// store 상세정보
 	List<Map<String, Object>> selectStoreList();
-
+	// 스토어 추가
 	int insertStore(Store store);
+	// 스태프 중복검증
+	int countByStaffManager(Store store);
 }
