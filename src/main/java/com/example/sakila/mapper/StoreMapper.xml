@@ -4,32 +4,22 @@
 	
 	<!-- store 상세정보 -->
 	<select id="selectStoreList" parameterType="Map">
-			select 
-				t.store_id storeId,
-				t.manager_staff_id managerStaffId,
+			select
+			    t.store_id storeId,
+			    t.manager_staff_id managerStaffId,
 			    t.address_id addressId,
-			    t.staff_id staffId,
-			    t.first_name firstName,
-			    t.last_name lastName,
-			    t.email email,
-			    t.username username,
 			    a.address address,
 			    a.district district,
 			    a.city_id cityId,
 			    a.postal_code postalCode,
 			    a.phone phone
-			from address a inner join (select 
-					st.store_id,
-					st.manager_staff_id,
-					st.address_id,
-					sf.staff_id,
-					sf.first_name,
-					sf.last_name,
-					sf.email,
-					sf.username
-				from store st left join staff sf
-				on st.store_id = sf.store_id) t 
-			on a.address_id = t.address_id
+			from address a 
+			inner join (select 
+			            store_id,
+			            manager_staff_id,
+			            address_id
+			           from store) t 
+			on a.address_id = t.address_id;
 	</select>
 	
 	<insert id="insertStore" parameterType="com.example.sakila.vo.Store" useGeneratedKeys="true" keyProperty="storeId">

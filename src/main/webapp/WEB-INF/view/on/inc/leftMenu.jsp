@@ -13,25 +13,12 @@
 		<hr> ::: 지점관리 :::<hr>		
 		<li class="list-group-item">
 			<a href="${pageContext.request.contextPath}/on/storeList">지점 리스트</a>
-			<!--
-				StoreMapper.selectStoreList():List<Map> - store x staff x address
-				StoreService.getStoreList():List<Map>
-				GET - /on/storList - StoreController.storeList() - storeList.jsp	
-			 -->
 		</li>
 		<li class="list-group-item">
 			<a href="${pageContext.request.contextPath}/on/addStore">지점 추가</a>
-			<!--
-				GET - /on/addStore - StoreController.addStor() : 
-				staffList 모델추가,
-				search주소검색결과 모델추가 - addStore.jsp
-				
-				StoreMapper.insertStore(): Integer
-				StoreService.addStore() : Integer
-				
-				POST - /on/addStore - StoreController.addStore(Store)	
-									
-			 -->
+		</li>
+		<li class="list-group-item">
+			<a href="${pageContext.request.contextPath}/on/addInventory">인벤토리 추가</a>
 		</li>
 		<hr> ::: STAFF 관리 :::<hr>		
 		<li class="list-group-item">

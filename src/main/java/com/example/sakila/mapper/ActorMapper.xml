@@ -12,7 +12,7 @@
 			#{firstName}, #{lastName}
 		)
 	</insert>
-	
+	<!-- 배우리스트 검색 -->
 	<select id="selectActorList" parameterType="Map" resultType="com.example.sakila.vo.Actor">
 		select
 			actor_id actorId,
@@ -80,4 +80,16 @@
 		from actor
 		where actor_id = #{actorId}
 	</delete>
+	
+	<!-- filmOne 배우검색시 리스트 -->
+	<select id="selectActorListByActor" parameterType="String" resultType="com.example.sakila.vo.Actor">
+		select
+			actor_id actorId,
+			first_name firstName,
+			last_name lastName
+		from actor
+		where first_name like concat('%',#{searchWord},'%')
+		or last_name like concat('%',#{searchWord},'%')
+		order by actor_id asc
+	</select>
 </mapper>

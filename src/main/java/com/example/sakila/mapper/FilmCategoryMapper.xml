@@ -25,4 +25,20 @@
 		on fc.category_id = c.category_id
 		where film_id = #{filmId};
 	</select>
+	
+	<insert id="insertFilmCategory" parameterType="com.example.sakila.vo.FilmCategory">
+		insert into film_category(
+			film_id,
+			category_id
+		) values(
+			#{filmId},
+			#{categoryId}
+		)
+	</insert>
+	
+	<delete id="deleteFilmCategory" parameterType="com.example.sakila.vo.FilmCategory">
+		delete
+		from film_category
+		where film_id=#{filmId} and category_id = #{categoryId}
+	</delete>
 </mapper>

@@ -19,31 +19,20 @@
 		
 		<div class="col-sm-10">
 			<!-- main content -->
-			<h1>STORE LIST</h1>
+			<h1>${storeId}지점 INVENTORY LIST</h1>
 			<table class="table table-striped">
 				<tr>
-					<td>storeId</td>
-					<td>managerStaffId</td>
-					<td>addressId(store)</td>
-					<td>address</td>
-					<td>district</td>
-					<td>cityId</td>
-					<td>postalCode</td>
-					<td>phone</td>
-					<td>inventory관리</td>
+					<td>inventoryId</td>
+					<td>filmId</td>
+					<td>title</td>
+					<td>lastUpdate</td>
 				</tr>
-				<c:forEach var="s" items="${storeList}">
+				<c:forEach var="iv" items="${inventoryList}">
 					<tr>
-						<td>${s.storeId}</td>
-						<td>${s.managerStaffId}</td>
-						<td>${s.addressId}</td>
-						<td>${s.address}</td>
-						<td>${s.district}</td>
-						<td>${s.cityId}</td>
-						<td>${s.postalCode}</td>
-						<td>${s.phone}</td>
-						<td><a href="${pageContext.request.contextPath}/on/inventoryList?storeId=${s.storeId}">인벤토리</a></td>
-					</tr>
+						<td>${iv.inventoryId}</td>
+						<td>${iv.filmId}</td>
+						<td>${iv.title}</td>
+						<td>${iv.lastUpdate}</td>
 				</c:forEach>
 			</table>
 		</div>

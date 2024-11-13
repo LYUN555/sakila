@@ -129,5 +129,10 @@ public class ActorService {
 			}
 		}
 	}
+	
+	// filmOne 에서 배우검색
+	public List<Actor> getActorListByActor(String searchName){
+		return actorMapper.selectActorListByActor(searchName);
+	}
 
 }

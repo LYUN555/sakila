@@ -7,4 +7,17 @@
 		from inventory
 		where film_id = #{filmId}
 	</select>
+	
+	<!-- inventortList(storId) 추가예정 film,rental, payment, customer -->
+	<select id="selectInventoryListByStore" parameterType="Map" resultType="Map">
+		select 
+			i.inventory_id inventoryId,
+		    i.film_id filmId,
+		    f.title title,
+		    i.last_update lastUpdate
+		from inventory i inner join film f
+		on i.film_id = f.film_id
+		where i.store_id = #{storeId}
+		limit #{beginRow},#{rowPerPage}
+	</select>
 </mapper>

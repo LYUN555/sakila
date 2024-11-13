@@ -11,6 +11,7 @@ import com.example.sakila.vo.Actor;
 public interface ActorMapper {
 	int insertActor(Actor actor);
 	
+	// actorList
 	List<Actor> selectActorList(Map<String, Object> map);
 
 	int selectActorCount(String searchWord);
@@ -22,4 +23,7 @@ public interface ActorMapper {
 	int updateActor(Actor actor);
 	
 	int deleteActor(int actorId);
+	
+	// filmOne: searchName 검색결과
+	List<Actor> selectActorListByActor(String searchWord);
 }

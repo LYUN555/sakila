@@ -92,7 +92,7 @@
 					<button id="btnSearchFilm" type="button">영화 검색</button>
 				</form>
 				
-				<form id="formAddFilm" method="post" action="${pageContext.request.contextPath}/on/addFilmByActor">
+				<form id="formAddFilm" method="post" action="${pageContext.request.contextPath}/on/addFilmActorByActor">
 					<input type="hidden" name="actorId" value="${actor.actorId}">
 					<select size="5" name = "filmId"  id = "filmId">
 						<c:forEach var="sf" items="${searchFilmList}">
@@ -112,7 +112,7 @@
 		                        </a>&nbsp;
 		                    </td>
 		                    <td>
-		                        <a href="${pageContext.request.contextPath}/on/removeFilmActor?actorId=${actor.actorId}&filmId=${fl.filmId}" class="btn btn-danger">출연작품 삭제</a>
+		                        <a href="${pageContext.request.contextPath}/on/removeFilmActorByActor?actorId=${actor.actorId}&filmId=${fl.filmId}" class="btn btn-danger">출연작품 삭제</a>
 		                		<!-- fileId & actorId 필요 -->
 		                	<td>
 		                </tr>

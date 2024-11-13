@@ -47,7 +47,7 @@ public class FilmController {
 	
 	
 	@GetMapping("/on/filmOne")
-	public String filmOne(Model model, @RequestParam int filmId, @RequestParam(required = false) String searchName) {
+	public String filmOne(Model model, @RequestParam Integer filmId, @RequestParam(required = false) String searchName) {
 		
 		/*
 		 * 1) 필름 정보
@@ -66,12 +66,18 @@ public class FilmController {
 		// 3)
 		List<Map<String, Object>> filmCategoryList = filmCategoryService.getFilmCategoryListByFilm(filmId);
 		log.debug("filmCategoryList :" + filmCategoryList.toString());
+		// 4) 배우이름 검색
+		List<Actor> searchActorList = null;
+		if(searchName != null) {
+			searchActorList = actorService.getActorListByActor(searchName);
+		}
 		// 5)
 		List<Actor> actorList = actorService.getActorListByFilm(filmId);
 		log.debug("actorList :" + actorList.toString());
 		model.addAttribute("film",film); // 1
 		model.addAttribute("allCategoryList",allCategoryList); // 2
 		model.addAttribute("filmCategoryList",filmCategoryList); // 3
+		model.addAttribute("searchActorList",searchActorList); // 4
 		model.addAttribute("actorList", actorList); // 5
 		return "on/filmOne";
 	}
