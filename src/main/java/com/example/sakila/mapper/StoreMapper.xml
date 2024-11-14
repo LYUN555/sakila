@@ -24,7 +24,7 @@
 		    where s.manager_staff_id is not null
 	</select>
 	
-	<!-- 문제 1) store_id 는 ai 인데 자꾸 0으로 설정됨 추가가 안되는중 -->
+	<!-- 문제 1) store_id 는 ai 인데 자꾸 0으로 설정됨 추가가 안되는중- 해결완료 -->
 	<insert id="insertStore" parameterType="com.example.sakila.vo.Store">
 		insert into store(
 			manager_staff_id,
