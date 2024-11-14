@@ -2,22 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.sakila.mapper.StoreMapper">
 	
-	<!-- store 상세정보 (고쳐야함 스토어에 스태프 추가가 안됨) -->
+	<!-- store 상세정보
+		문제 1) 스태프 추가할때 스토어도 넣어야 하는데 스토어 리스트에 스태프가 다출력되면서 같은 스토어가 여러번 나옴 - 해결
+	 -->
 	<select id="selectStoreList" parameterType="Map">
 			select
-			    s.store_id storeId,
-			    s.manager_staff_id managerStaffId,
-			    s.address_id addressId,
-			    a.address address,
-			    a.district district,
-			    a.city_id cityId,
-			    a.postal_code postalCode,
+		      	s.store_id storeId, 
+		        s.manager_staff_id managerStaffId, 
+		        st.staff_id staffId, 
+		        st.first_name firstName,
+		        st.last_name lastName,
+		        a.address_id addressId, 
+		        a.address address, 
+		        a.district district,
+		        a.city_id cityId,
+		        a.postal_code postalCode,
 			    a.phone phone
-			from address a 
-			inner join store s
-			on a.address_id = s.address_id
+			from store s
+			left join staff st on s.manager_staff_id = st.staff_id
+		    left join address a on s.address_id = a.address_id
+		    where s.manager_staff_id is not null
 	</select>
 	
+	<!-- 문제 1) store_id 는 ai 인데 자꾸 0으로 설정됨 추가가 안되는중 -->
 	<insert id="insertStore" parameterType="com.example.sakila.vo.Store" useGeneratedKeys="true" keyProperty="storeId">
 		insert into store(
 			manager_staff_id,
@@ -27,6 +34,7 @@
 		)
 	</insert>
 	
+	<!-- 매니저스태프는 pk 여서 중복체크가 필요 -->
 	<select id="countByStaffManager" parameterType="com.example.sakila.vo.Store">
 		select count(*)
 		from store

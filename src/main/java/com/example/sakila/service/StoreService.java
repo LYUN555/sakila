@@ -24,6 +24,7 @@ public class StoreService {
 	}
 
 	public int addStore(Store store) {
+		log.debug("Store ID after insertion: " + store.getStoreId());
 		return storeMapper.insertStore(store);
 	}
 

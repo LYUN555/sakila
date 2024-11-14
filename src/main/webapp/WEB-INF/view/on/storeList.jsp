@@ -24,6 +24,7 @@
 				<tr>
 					<td>storeId</td>
 					<td>managerStaffId</td>
+					<td>managerName</td>
 					<td>addressId(store)</td>
 					<td>address</td>
 					<td>district</td>
@@ -36,6 +37,7 @@
 					<tr>
 						<td>${s.storeId}</td>
 						<td>${s.managerStaffId}</td>
+						<td>${s.firstName} ${s.lastName}</td>
 						<td>${s.addressId}</td>
 						<td>${s.address}</td>
 						<td>${s.district}</td>
