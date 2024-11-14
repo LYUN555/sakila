@@ -25,7 +25,7 @@
 	</select>
 	
 	<!-- 문제 1) store_id 는 ai 인데 자꾸 0으로 설정됨 추가가 안되는중 -->
-	<insert id="insertStore" parameterType="com.example.sakila.vo.Store" useGeneratedKeys="true" keyProperty="storeId">
+	<insert id="insertStore" parameterType="com.example.sakila.vo.Store">
 		insert into store(
 			manager_staff_id,
 			address_id
@@ -34,10 +34,10 @@
 		)
 	</insert>
 	
-	<!-- 매니저스태프는 pk 여서 중복체크가 필요 -->
+	<!-- 매니저스태프는 pk 여서 중복체크가 필요 - 해결완료 -->
 	<select id="countByStaffManager" parameterType="com.example.sakila.vo.Store">
 		select count(*)
 		from store
-		where store_id = #{storeId} and manager_staff_id=#{managerStaffId}
+		where manager_staff_id=#{managerStaffId}
 	</select>
 </mapper>

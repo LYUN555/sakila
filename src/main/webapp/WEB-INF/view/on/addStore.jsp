@@ -36,7 +36,7 @@
 			<button type="button" id="btnAddrSel" class="btn btn-success">주소선택</button>
 			
 			<h2>매니져 선택</h2>
-			
+			<div>${param.msg}</div>
 			<form id ="formAddStore" method ="post" action="${pageContext.request.contextPath}/on/addStore">
 				<table class = "table table-bordered" style="width: 80%">
 					<tr>

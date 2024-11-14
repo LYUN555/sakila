@@ -32,6 +32,7 @@ public class StoreService {
 		boolean check = false;
 		
 		int count = storeMapper.countByStaffManager(store);
+		log.debug("count-------------------------------------------: " + count);
 		if(count>0) {
 			check = true;
 		}

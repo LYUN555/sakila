@@ -1,5 +1,7 @@
 package com.example.sakila.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
@@ -64,11 +66,18 @@ public class StoreController {
 		log.debug(store.toString());
 		// 매니저스태프 중복체크
 		boolean checkManagerExists = storeService.checkManagerExists(store);
-		if (checkManagerExists) { // 중복이 없을시
-			storeService.addStore(store);
-			// 추가 성공후 리스트로
-			return "on/storeList";
+		if (checkManagerExists) { // 중복이 있을시 
+			// 추가 실패 --> 다시 추가 폼으로
+			String msg = "";
+			try {
+				msg = URLEncoder.encode("이미 지정된 매니저 입니다", "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			return "redirect:/on/addStore?msg="+msg;
 		}
-		return "on/addStore";
+		// 추가 성공후 리스트로
+		storeService.addStore(store);
+		return "redirect:/on/storeList";
 	}
 }
