@@ -29,10 +29,10 @@
 		</li>
 		<hr> ::: 영화 관리 :::<hr>		
 		<li class="list-group-item">
-			<a href="${pageContext.request.contextPath}/on/filmList">카테고리 리스트</a>
+			<a href="${pageContext.request.contextPath}/on/categoryList">카테고리 리스트</a>
 		</li>
 		<li class="list-group-item">
-			<a href="${pageContext.request.contextPath}/on/addFilm">카테고리 추가</a>
+			<a href="${pageContext.request.contextPath}/on/addCategory">카테고리 추가</a>
 		</li>
 		<li class="list-group-item">
 			<a href="${pageContext.request.contextPath}/on/filmList">영화 리스트</a>
