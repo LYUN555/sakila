@@ -18,5 +18,10 @@ public class CategoryService {
 	public List<Category> getCategoryList(){
 		return categoryMapper.selectCategoryList();
 	}
+
+	public int addCategory(String name) {
+		return categoryMapper.insertCategory(name);
+		
+	}
 	
 }

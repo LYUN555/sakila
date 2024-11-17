@@ -9,4 +9,9 @@
 			last_update lastUpdate
 		from category
 	</select>
+	
+	<!-- 카테고리 추가 -->
+	<insert id="insertCategory" parameterType="String">
+		insert into Category(name) values(#{name})
+	</insert>
 </mapper>
