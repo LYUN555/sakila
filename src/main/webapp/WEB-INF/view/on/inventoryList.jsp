@@ -39,12 +39,20 @@
 			<c:if test="${currentPage<10}">
 				<a href="#">이전</a>
 			</c:if>
-			<c:if test="${currentPage>10}">
-				<a href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${currentPage-9}">이전</a>
+			<c:if test="${startPage>10}">
+				<a href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${startPage-10}">이전</a>
 			</c:if>
-			<c:forEach var="i" begin="${currentPage}" end="">
-			
+			<c:forEach var="i" begin="${startPage}" end="${startPage+9}">
+				<c:if test="${i <= lastPage}">
+					<a href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${i}">${i}</a>
+				</c:if>
 			</c:forEach>
+			<c:if test="${startPage + 10 <= lastPage}">
+		        <a href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${startPage+10}">다음</a>
+		    </c:if>
+			<c:if test="${startPage + 10 >= lastPage}">
+		        <a href="#">다음</a>
+		    </c:if>
 		</div>
 		</div>
 	</div>

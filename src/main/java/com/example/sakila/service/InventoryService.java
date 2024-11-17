@@ -22,12 +22,10 @@ public class InventoryService {
 
 	public List<Map<String,Object>> getInventoryListByStore(Integer storeId,Integer currentPage, Integer rowPerPage){
 		int beginRow = (currentPage-1)*rowPerPage;
-		int startPage = (currentPage-1)/10*10+1; //1..11.. 21.. 31..
 		Map<String,Object> paramMap = new HashMap<>();
 		paramMap.put("storeId", storeId);
 		paramMap.put("beginRow", beginRow);
 		paramMap.put("rowPerPage", rowPerPage);
-		
 		return inventoryMapper.selectInventoryListByStore(paramMap);
 	}
 	
