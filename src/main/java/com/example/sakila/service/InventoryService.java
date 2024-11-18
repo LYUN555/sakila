@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.sakila.mapper.InventoryMapper;
+import com.example.sakila.vo.Inventory;
 
 @Service
 @Transactional
@@ -29,7 +30,15 @@ public class InventoryService {
 		return inventoryMapper.selectInventoryListByStore(paramMap);
 	}
 	
-	public int getTotalRow(Integer storeId) {
+	public Integer getTotalRow(Integer storeId) {
 		return inventoryMapper.selectInventoryTotalRowBystoreId(storeId);
+	}
+	
+	public Integer addInventory(Inventory inventory) {
+		return inventoryMapper.insertInventory(inventory);
+	}
+	
+	public Integer removeInventoryByKey(Integer inventoryId) {
+		return inventoryMapper.deleteInventoryBykey(inventoryId);
 	}
 }

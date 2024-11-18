@@ -18,6 +18,7 @@
 		from inventory i inner join film f
 		on i.film_id = f.film_id
 		where i.store_id = #{storeId}
+		order by i.inventory_id desc
 		limit #{beginRow},#{rowPerPage}
 	</select>
 	
@@ -27,4 +28,15 @@
 		from inventory
 		where store_id = #{storeId};
 	</select>
+	
+	<!-- 인벤토리 추가 -->
+	<insert id="insertInventory" parameterType="com.example.sakila.vo.Inventory">
+		insert into inventory(film_id, store_id) values(#{filmId},#{storeId})
+	</insert>
+	
+	<!-- 인벤토리 삭제 -->
+	<delete id="deleteInventoryBykey" parameterType="Integer">
+		delete from inventory
+		where inventory_id = #{inventoryId}
+	</delete>
 </mapper>

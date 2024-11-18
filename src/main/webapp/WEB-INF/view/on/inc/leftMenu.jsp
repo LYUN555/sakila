@@ -10,15 +10,12 @@
 		<li class="list-group-item">
 			<a href="${pageContext.request.contextPath}/on/logout">로그아웃</a>
 		</li>
-		<hr> ::: 지점관리 :::<hr>		
+		<hr> ::: 지점&인벤토리관리 :::<hr>		
 		<li class="list-group-item">
 			<a href="${pageContext.request.contextPath}/on/storeList">지점 리스트</a>
 		</li>
 		<li class="list-group-item">
 			<a href="${pageContext.request.contextPath}/on/addStore">지점 추가</a>
-		</li>
-		<li class="list-group-item">
-			<a href="${pageContext.request.contextPath}/on/addInventory">인벤토리 추가</a>
 		</li>
 		<hr> ::: STAFF 관리 :::<hr>		
 		<li class="list-group-item">
@@ -48,10 +45,10 @@
 		</li>
 		<hr> ::: 고객 관리 :::<hr>		
 		<li class="list-group-item">
-			<a href="${pageContext.request.contextPath}/on/">고객 리스트</a>
+			<a href="${pageContext.request.contextPath}/on/customerList">고객 리스트</a>
 		</li>
 		<li class="list-group-item">
-			<a href="${pageContext.request.contextPath}/on/">고객 추가</a>
+			<a href="${pageContext.request.contextPath}/on/addCustomer">고객 추가</a>
 		</li>
 		<hr> ::: 배우 관리 :::<hr>		
 		<li class="list-group-item">

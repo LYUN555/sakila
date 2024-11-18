@@ -23,24 +23,31 @@
 			<table class="table table-striped">
 				<tr>
 					<td>inventoryId</td>
-					<td>filmId</td>
-					<td>title</td>
+					<td>(filmId)title</td>
 					<td>lastUpdate</td>
+					<td>삭제</td>
 				</tr>
 				<c:forEach var="iv" items="${inventoryList}">
 					<tr>
 						<td>${iv.inventoryId}</td>
-						<td>${iv.filmId}</td>
-						<td>${iv.title}</td>
+						<td>
+							<a href="${pageContext.request.contextPath}/on/filmOne?filmId=${iv.filmId}">(${iv.filmId})${iv.title}</a>
+						</td>
 						<td>${iv.lastUpdate}</td>
+						<td>
+							<a href="${pageContext.request.contextPath}/on/removeInventoryByKey?inventoryId=${iv.inventoryId}&storeId=${storeId}" class="btn btn-danger">삭제</a>
+						</td>
 				</c:forEach>
 			</table>
+			<div>
+				<a href="${pageContext.request.contextPath}/on/addInventory?storeId=${s.storeId}" class="btn btn-success">인벤토리추가</a>
+			</div>
 		<div>
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
 
             <li class="page-item">
-                <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=1">첫 페이지</a>
+                <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=1">처음</a>
             </li>
             <c:if test="${startPage > 10}">
                 <li class="page-item">

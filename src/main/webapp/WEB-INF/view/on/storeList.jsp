@@ -31,6 +31,7 @@
 					<td>cityId</td>
 					<td>postalCode</td>
 					<td>phone</td>
+					<td>inventoryList</td>
 					<td>inventory관리</td>
 				</tr>
 				<c:forEach var="s" items="${storeList}">
@@ -45,6 +46,7 @@
 						<td>${s.postalCode}</td>
 						<td>${s.phone}</td>
 						<td><a href="${pageContext.request.contextPath}/on/inventoryList?storeId=${s.storeId}">인벤토리</a></td>
+						<td><a href="${pageContext.request.contextPath}/on/addInventory?storeId=${s.storeId}">인벤토리추가</a></td>
 					</tr>
 				</c:forEach>
 			</table>
