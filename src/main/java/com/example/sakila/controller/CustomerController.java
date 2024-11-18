@@ -57,16 +57,9 @@ public class CustomerController {
 	public String customerList(Model model, @RequestParam(required = false) String searchName, @RequestParam(defaultValue = "1") Integer currentPage, @RequestParam(defaultValue = "10") Integer rowPerPage) {
 		Map<String, Object> resultMap = null;
 		int lastPage = 0;
-		if(searchName !=null && !searchName.equals("")) {
-			resultMap = customerService.getCustomerListBySearchName(currentPage, rowPerPage, searchName);
-			lastPage = customerService.getLastPageBySearchName(searchName, rowPerPage);
-		} else {
-			resultMap = customerService.getCustomerList(currentPage, rowPerPage);
-			lastPage = customerService.getLastPage(rowPerPage);
-		}
+		resultMap = customerService.getCustomerList(currentPage, rowPerPage, searchName);
+		lastPage = customerService.getLastPage(rowPerPage, searchName);
 		
-		
-		 
 		model.addAttribute("searchName",searchName);
 		model.addAttribute("currentPage",currentPage);
 

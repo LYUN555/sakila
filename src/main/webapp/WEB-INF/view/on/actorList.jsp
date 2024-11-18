@@ -40,44 +40,44 @@
 				<input type="text" name="searchWord" id="searchWord" value="${searchWord}">
 				<button id="btnSearch" class="btn btn-success">이름검색</button>
 			</form>
-		</div>
-		<div>
-			<nav aria-label="Page navigation">
-			    <ul class="pagination justify-content-center">
-			    
-			        <li class="page-item">
-			            <a class="page-link" href="${pageContext.request.contextPath}/on/actorList?currentPage=1&searchWord=${searchWord}">첫 페이지</a>
-			        </li>
-			        
-			        <c:if test="${currentPage > 1}">
-			            <li class="page-item">
-			                <a class="page-link" href="${pageContext.request.contextPath}/on/actorList?currentPage=${currentPage-1}&searchWord=${searchWord}">이전</a>
+			<div>
+				<nav aria-label="Page navigation">
+				    <ul class="pagination justify-content-center">
+				    
+				        <li class="page-item">
+				            <a class="page-link" href="${pageContext.request.contextPath}/on/actorList?currentPage=1&searchWord=${searchWord}">첫 페이지</a>
+				        </li>
+				        
+				        <c:if test="${currentPage > 1}">
+				            <li class="page-item">
+				                <a class="page-link" href="${pageContext.request.contextPath}/on/actorList?currentPage=${currentPage-1}&searchWord=${searchWord}">이전</a>
+				            </li>
+				        </c:if>
+				        <c:if test="${currentPage <= 1}">
+				            <li class="page-item disabled">
+				                <a class="page-link" href="#">이전</a>
+				            </li>
+				        </c:if>
+						<li class="page-item">
+			                <span class="page-link">${currentPage}</span>
 			            </li>
-			        </c:if>
-			        <c:if test="${currentPage <= 1}">
-			            <li class="page-item disabled">
-			                <a class="page-link" href="#">이전</a>
-			            </li>
-			        </c:if>
-					<li class="page-item">
-		                <span class="page-link">${currentPage}</span>
-		            </li>
-			        <c:if test="${currentPage < lastPage}">
-			            <li class="page-item">
-			                <a class="page-link" href="${pageContext.request.contextPath}/on/actorList?currentPage=${currentPage+1}&searchWord=${searchWord}">다음</a>
-			            </li>
-			        </c:if>
-			        <c:if test="${currentPage >= lastPage}">
-			            <li class="page-item disabled">
-			                <a class="page-link" href="#">다음</a>
-			            </li>
-			        </c:if>
-			
-			        <li class="page-item">
-			            <a class="page-link" href="${pageContext.request.contextPath}/on/actorList?currentPage=${lastPage}&searchWord=${searchWord}">마지막</a>
-			        </li>
-			    </ul>
-			</nav>
+				        <c:if test="${currentPage < lastPage}">
+				            <li class="page-item">
+				                <a class="page-link" href="${pageContext.request.contextPath}/on/actorList?currentPage=${currentPage+1}&searchWord=${searchWord}">다음</a>
+				            </li>
+				        </c:if>
+				        <c:if test="${currentPage >= lastPage}">
+				            <li class="page-item disabled">
+				                <a class="page-link" href="#">다음</a>
+				            </li>
+				        </c:if>
+				
+				        <li class="page-item">
+				            <a class="page-link" href="${pageContext.request.contextPath}/on/actorList?currentPage=${lastPage}&searchWord=${searchWord}">마지막</a>
+				        </li>
+				    </ul>
+				</nav>
+			</div>
 		</div>
 	</div>
 </body>
