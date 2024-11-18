@@ -19,7 +19,69 @@
 		
 		<div class="col-sm-10">
 			<!-- main content -->
-			<h1>페이지 제목</h1>
+			<h1>CUSTOMER LIST</h1>
+			<table class="table table-striped">
+				<tr>
+					<th>customerId</th>
+					<th>storeId</th>
+					<th>name</th>
+					<th>email</th>
+					<th>addressId</th>
+					<th>createDate</th>
+					<th>lastUpdate</th>
+				</tr>
+				<c:forEach var="c" items="${customerList}">
+					<tr>
+						<td>${c.customerId }</td>			
+						<td>${c.storeId }</td>			
+						<td>${c.firstName} ${c.lastName}</td>			
+						<td>${c.email}</td>			
+						<td>${c.addressId}</td>			
+						<td>${c.createDate}</td>			
+						<td>${c.lastUpdate}</td>			
+					</tr>
+				</c:forEach>
+			</table>
+			<div>
+				<nav aria-label="Page navigation">
+			        <ul class="pagination justify-content-center">
+			
+			            <li class="page-item">
+			                <a class="page-link" href="${pageContext.request.contextPath}/on/customerList?currentPage=1">처음</a>
+			            </li>
+			            <c:if test="${startPage > 10}">
+			                <li class="page-item">
+			                    <a class="page-link" href="${pageContext.request.contextPath}/on/customerList?currentPage=${startPage-10}">이전</a>
+			                </li>
+			            </c:if>
+			            <c:if test="${startPage <= 10}">
+			                <li class="page-item disabled">
+			                    <a class="page-link" href="#">이전</a>
+			                </li>
+			            </c:if>
+			            <c:forEach var="i" begin="${startPage}" end="${nextPage}">
+			                <c:if test="${i <= lastPage}">
+			                    <li class="page-item">
+			                        <a class="page-link" href="${pageContext.request.contextPath}/on/customerList?currentPage=${i}">${i}</a>
+			                    </li>
+			                </c:if>
+			            </c:forEach>
+			            <c:if test="${startPage + 10 <= lastPage}">
+			                <li class="page-item">
+			                    <a class="page-link" href="${pageContext.request.contextPath}/on/customerList?currentPage=${startPage+10}">다음</a>
+			                </li>
+			            </c:if>
+			            <c:if test="${startPage + 10 > lastPage}">
+			                <li class="page-item disabled">
+			                    <a class="page-link" href="#">다음</a>
+			                </li>
+			            </c:if>
+			            <li class="page-item">
+			                <a class="page-link" href="${pageContext.request.contextPath}/on/customerList?currentPage=${lastPage}">마지막</a>
+			            </li>
+			        </ul>
+			    </nav>
+			</div>
 		</div>
 	</div>
 </body>

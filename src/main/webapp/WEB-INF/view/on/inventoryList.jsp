@@ -43,45 +43,45 @@
 				<a href="${pageContext.request.contextPath}/on/addInventory?storeId=${s.storeId}" class="btn btn-success">인벤토리추가</a>
 			</div>
 		<div>
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-
-            <li class="page-item">
-                <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=1">처음</a>
-            </li>
-            <c:if test="${startPage > 10}">
-                <li class="page-item">
-                    <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${startPage-10}">이전</a>
-                </li>
-            </c:if>
-            <c:if test="${startPage <= 10}">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#">이전</a>
-                </li>
-            </c:if>
-            <c:forEach var="i" begin="${startPage}" end="${endPage}">
-                <c:if test="${i <= lastPage}">
-                    <li class="page-item <c:if test='${i == currentPage}'>active</c:if>'">
-                        <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${i}">${i}</a>
-                    </li>
-                </c:if>
-            </c:forEach>
-            <c:if test="${startPage + 10 <= lastPage}">
-                <li class="page-item">
-                    <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${startPage+10}">다음</a>
-                </li>
-            </c:if>
-            <c:if test="${startPage + 10 > lastPage}">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#">다음</a>
-                </li>
-            </c:if>
-            <li class="page-item">
-                <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${lastPage}">마지막</a>
-            </li>
-        </ul>
-    </nav>
-</div>
+		    <nav aria-label="Page navigation">
+		        <ul class="pagination justify-content-center">
+		
+		            <li class="page-item">
+		                <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=1">처음</a>
+		            </li>
+		            <c:if test="${startPage > 10}">
+		                <li class="page-item">
+		                    <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${startPage-10}">이전</a>
+		                </li>
+		            </c:if>
+		            <c:if test="${startPage <= 10}">
+		                <li class="page-item disabled">
+		                    <a class="page-link" href="#">이전</a>
+		                </li>
+		            </c:if>
+		            <c:forEach var="i" begin="${startPage}" end="${endPage}">
+		                <c:if test="${i <= lastPage}">
+		                    <li class="page-item <c:if test='${i == currentPage}'>active</c:if>'">
+		                        <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${i}">${i}</a>
+		                    </li>
+		                </c:if>
+		            </c:forEach>
+		            <c:if test="${startPage + 10 <= lastPage}">
+		                <li class="page-item">
+		                    <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${startPage+10}">다음</a>
+		                </li>
+		            </c:if>
+		            <c:if test="${startPage + 10 > lastPage}">
+		                <li class="page-item disabled">
+		                    <a class="page-link" href="#">다음</a>
+		                </li>
+		            </c:if>
+		            <li class="page-item">
+		                <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${lastPage}">마지막</a>
+		            </li>
+		        </ul>
+		    </nav>
+		</div>
 		</div>
 	</div>
 </body>
