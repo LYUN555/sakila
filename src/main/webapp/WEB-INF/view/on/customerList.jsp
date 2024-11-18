@@ -32,7 +32,7 @@
 				</tr>
 				<c:forEach var="c" items="${customerList}">
 					<tr>
-						<td>${c.customerId }</td>			
+						<td><a href="">${c.customerId}</a></td><!-- 렌탈 x 지불 조인 -->			
 						<td>${c.storeId }</td>			
 						<td>${c.firstName} ${c.lastName}</td>			
 						<td>${c.email}</td>			
@@ -47,11 +47,11 @@
 			        <ul class="pagination justify-content-center">
 			
 			            <li class="page-item">
-			                <a class="page-link" href="${pageContext.request.contextPath}/on/customerList?currentPage=1">처음</a>
+			                <a class="page-link" href="${pageContext.request.contextPath}/on/customerList?currentPage=1&searchName=${searchName}">처음</a>
 			            </li>
 			            <c:if test="${startPage > 10}">
 			                <li class="page-item">
-			                    <a class="page-link" href="${pageContext.request.contextPath}/on/customerList?currentPage=${startPage-10}">이전</a>
+			                    <a class="page-link" href="${pageContext.request.contextPath}/on/customerList?currentPage=${startPage-10}&searchName=${searchName}">이전</a>
 			                </li>
 			            </c:if>
 			            <c:if test="${startPage <= 10}">
@@ -62,13 +62,13 @@
 			            <c:forEach var="i" begin="${startPage}" end="${nextPage}">
 			                <c:if test="${i <= lastPage}">
 			                    <li class="page-item">
-			                        <a class="page-link" href="${pageContext.request.contextPath}/on/customerList?currentPage=${i}">${i}</a>
+			                        <a class="page-link" href="${pageContext.request.contextPath}/on/customerList?currentPage=${i}&searchName=${searchName}">${i}</a>
 			                    </li>
 			                </c:if>
 			            </c:forEach>
 			            <c:if test="${startPage + 10 <= lastPage}">
 			                <li class="page-item">
-			                    <a class="page-link" href="${pageContext.request.contextPath}/on/customerList?currentPage=${startPage+10}">다음</a>
+			                    <a class="page-link" href="${pageContext.request.contextPath}/on/customerList?currentPage=${startPage+10}&searchName=${searchName}">다음</a>
 			                </li>
 			            </c:if>
 			            <c:if test="${startPage + 10 > lastPage}">
@@ -77,12 +77,27 @@
 			                </li>
 			            </c:if>
 			            <li class="page-item">
-			                <a class="page-link" href="${pageContext.request.contextPath}/on/customerList?currentPage=${lastPage}">마지막</a>
+			                <a class="page-link" href="${pageContext.request.contextPath}/on/customerList?currentPage=${lastPage}&searchName=${searchName}">마지막</a>
 			            </li>
 			        </ul>
 			    </nav>
 			</div>
+			<div>
+				<form id="formSearchName" method="get" action="${pageContext.request.contextPath}/on/customerList">
+					<input type="text" name="searchName" id = "searchName" value="${searchName}">
+					<button id="btnSearchName" type="button" class="btn btn-success">이름검색</button>
+				</form>
+			</div>
 		</div>
 	</div>
 </body>
+<script>
+	$('#btnSearchName').click(function() {
+		if($('#searchName').val()== ''){
+			alert('검색어를 입력해주세요');
+			return;
+		}
+		$('#formSearchName').submit();
+	});
+</script>
 </html>

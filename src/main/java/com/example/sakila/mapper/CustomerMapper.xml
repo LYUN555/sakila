@@ -17,7 +17,7 @@
 			#{addressId}
 		)
 	</insert>
-	<!-- 고객 리스트 -->
+	<!-- 전체 고객 리스트 -->
 	<select id="selectCustomerList" parameterType="Map" resultType="com.example.sakila.vo.Customer">
 		select
 			customer_id customerId,
@@ -33,8 +33,32 @@
 		order by customer_id desc
 		limit #{beginRow}, #{rowPerPage}
 	</select>
-	<!-- 토탈 행 -->
+	<!-- 전체 토탈 행 -->
 	<select id="getTotalRow" parameterType="Integer">
 		select count(*) from customer
+	</select>
+	<!-- 고객 검색 리스트 -->
+	<select id="selectCustomerListBySearchName" parameterType="Map" resultType="com.example.sakila.vo.Customer">
+		select
+			customer_id customerId,
+			store_id storeId,
+			first_name firstName,
+			last_name lastName,
+			address_id addressId,
+			email,
+			active,
+			create_date createDate,
+			last_update lastUpdate
+		from customer
+		where first_name like concat('%',#{searchName},'%')
+		or last_name like concat('%',#{searchName},'%')
+		order by customer_id desc
+		limit #{beginRow}, #{rowPerPage}
+	</select>
+	<!-- 고객 검색후 나올 토탈 행 -->
+	<select id="getTotalRowBySearchName" parameterType="String">
+		select count(*) from customer
+		where  first_name like concat('%',#{searchName},'%')
+		or last_name like concat('%',#{searchName},'%')
 	</select>
 </mapper>
