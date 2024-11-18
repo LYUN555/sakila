@@ -24,18 +24,24 @@ public class InventoryService {
 		return inventoryMapper.selectCountInventoryByFilm(filmId);
 	}
 
-	public List<Map<String,Object>> getInventoryListByStore(Integer storeId,Integer currentPage, Integer rowPerPage){
+	public List<Map<String,Object>> getInventoryListByStore(Integer storeId,Integer currentPage, Integer rowPerPage, String searchInventory){
 		int beginRow = (currentPage-1)*rowPerPage;
 		Map<String,Object> paramMap = new HashMap<>();
 		paramMap.put("storeId", storeId);
 		paramMap.put("beginRow", beginRow);
 		paramMap.put("rowPerPage", rowPerPage);
+		paramMap.put("searchInventory", searchInventory);
+		
+		log.debug("paramMap : "+paramMap);
 		return inventoryMapper.selectInventoryListByStore(paramMap);
 	}
 	
-	public Integer getLastPage(Integer storeId, Integer rowPerPage) {
+	public Integer getLastPage(Integer storeId, Integer rowPerPage, String searchInventory) {
 		log.debug("getLastPage storeId:"+storeId);
-		int totalRow = inventoryMapper.selectInventoryTotalRowBystoreId(storeId);
+		Map<String,Object> paramMap = new HashMap<>();
+		paramMap.put("storeId", storeId);
+		paramMap.put("searchInventory", searchInventory);
+		int totalRow = inventoryMapper.selectInventoryTotalRowBystoreId(paramMap);
 		int lastPage = totalRow / rowPerPage;
 		if(totalRow % rowPerPage != 0) {
 			lastPage++;

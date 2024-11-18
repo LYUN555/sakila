@@ -84,6 +84,11 @@
 		    replacement_cost replacementCost,
 		    rating
 		from film
+		<where>
+			<if test="searchFilm != null and searchFilm != '' ">
+				title like concat('%',#{searchFilm},'%')
+			</if>
+		</where>
 		order by film_id desc
 		limit #{beginRow} , #{rowPerPage}
 	</select>
@@ -92,6 +97,11 @@
 	<select id="selectFilmCount" resultType="int">
 		select count(*)
 		from film
+		<where>
+			<if test="searchFilm != null and searchFilm != '' ">
+				title like concat('%',#{searchFilm},'%')
+			</if>
+		</where>
 	</select>
 	
 	<!-- 영화 리스트 (categoryId 가 null이거나 0이 아닐떄) -->
@@ -108,7 +118,14 @@
 		    fc.category_id categoryId
 		from film f inner join film_category fc
 		on f.film_id = fc.film_id
-		where fc.category_id = #{categoryId}
+		<where>
+			<if test="categoryId != null">
+			fc.category_id = #{categoryId}
+			</if>
+			<if test="searchFilm != null and searchFilm != '' ">
+				title like concat('%',#{searchFilm},'%')
+			</if>
+		</where>
 		order by f.film_id desc
 		limit #{beginRow} , #{rowPerPage}
 	</select>
@@ -117,7 +134,14 @@
 	<select id="selectFilmCountByCategory" parameterType="Integer" resultType="int">
 		select count(*)
 		from film_category
-		where category_id = #{categoryId}
+		<where>
+			<if test="categoryId != null">
+				category_id = #{categoryId}
+			</if>
+			<if test="searchFilm != null and searchFilm != '' ">
+				title like concat('%',#{searchFilm},'%')
+			</if>
+		</where>
 	</select>
 	
 	<delete id="deleteFilmByKey" parameterType="Integer">

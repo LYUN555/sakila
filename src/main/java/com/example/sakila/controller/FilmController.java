@@ -101,17 +101,19 @@ public class FilmController {
 	}
 	// 영화 리스트
 	@GetMapping("/on/filmList")
-	public String filmList(Model model, @RequestParam(required = false) Integer categoryId, @RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "10") int rowPerPage) {
+	public String filmList(Model model,@RequestParam(required = false) String searchFilm, @RequestParam(required = false) Integer categoryId, @RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "10") int rowPerPage) {
 		log.debug("categoryId : "+categoryId);
-		List<Map<String, Object>> filmList = filmService.getFilmList(categoryId, currentPage, rowPerPage);
+		log.debug("searchFilm : "+searchFilm);
+		List<Map<String, Object>> filmList = filmService.getFilmList(categoryId, currentPage, rowPerPage, searchFilm);
 		log.debug("filmList : "+filmList);
 		List<Category> categoryList = categoryService.getCategoryList();
 		log.debug("categoryList : "+categoryList);
-		int lastPage = filmService.getTotalCount(categoryId, rowPerPage);
+		int lastPage = filmService.getTotalCount(categoryId, rowPerPage, searchFilm);
 		log.debug("currentPage : "+currentPage);
 		log.debug("rowPerPage : "+rowPerPage);
 		log.debug("lastPage : "+lastPage);
 		log.debug("categoryId : "+categoryId);
+		model.addAttribute("searchFilm", searchFilm);
 		model.addAttribute("filmList", filmList);
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("currentPage", currentPage);

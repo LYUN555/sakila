@@ -73,12 +73,15 @@ public class FilmService {
 	}
 	
 	// 필름 리스트
-	public List<Map<String,Object>> getFilmList(Integer categoryId, int currentPage, int rowPerPage){
+	public List<Map<String,Object>> getFilmList(Integer categoryId, int currentPage, int rowPerPage, String searchFilm){
 		Map<String, Object> paramMap = new HashMap<>();
 		if(categoryId == null || categoryId == 0) {
 			paramMap.put("categoryId", null);
 		} else {
 			paramMap.put("categoryId", categoryId);
+		}
+		if(searchFilm != null) {
+			paramMap.put("searchFilm", searchFilm);
 		}
 		int beginRow = (currentPage-1) * rowPerPage;
 		paramMap.put("beginRow", beginRow);
@@ -90,12 +93,16 @@ public class FilmService {
 		}
 	}
 	// 필름 리스트 페이징
-	public int getTotalCount(Integer categoryId, int rowPerPage) {
+	public int getTotalCount(Integer categoryId, int rowPerPage, String searchFilm) {
 		int count = 0;
+		Map<String,Object> paramMap = new HashMap<>();
+		paramMap.put("categoryId", categoryId);
+		paramMap.put("searchFilm", searchFilm);
+		
 		if(categoryId == null || categoryId == 0) {
-			count = filmMapper.selectFilmCount();
+			count = filmMapper.selectFilmCount(searchFilm);
 		} else {
-			count = filmMapper.selectFilmCountByCategory(categoryId);
+			count = filmMapper.selectFilmCountByCategory(paramMap);
 		}
 		int lastPage = count / rowPerPage;
 		if(count % rowPerPage != 0) {

@@ -17,16 +17,28 @@
 		    i.last_update lastUpdate
 		from inventory i inner join film f
 		on i.film_id = f.film_id
-		where i.store_id = #{storeId}
+		<where>
+			i.store_id = #{storeId}
+			<if test="searchInventory != null and searchInventory != '' ">
+				 and f.title like concat('%',#{searchInventory},'%')
+			</if>
+		</where>
 		order by i.inventory_id desc
 		limit #{beginRow},#{rowPerPage}
 	</select>
 	
 	<!-- inventoryTotalRowBystoreId -->
-	<select id="selectInventoryTotalRowBystoreId" parameterType="Integer">
+	<select id="selectInventoryTotalRowBystoreId" parameterType="Map">
 		select count(*)
-		from inventory
-		where store_id = #{storeId};
+		from inventory i
+	    inner join film f
+	    on i.film_id = f.film_id
+		<where>
+			i.store_id = #{storeId}
+			<if test="searchInventory != null and searchInventory != '' ">
+			and f.title like concat('%',#{searchInventory},'%')
+			</if>
+		</where>
 	</select>
 	
 	<!-- 인벤토리 추가 -->

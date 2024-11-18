@@ -40,49 +40,62 @@
 				</c:forEach>
 			</table>
 			<div>
+			    <nav aria-label="Page navigation">
+			        <ul class="pagination justify-content-center">
+			
+			            <li class="page-item">
+			                <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=1&searchInventory=${searchInventory}">처음</a>
+			            </li>
+			            <c:if test="${startPage > 10}">
+			                <li class="page-item">
+			                    <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${startPage-10}&searchInventory=${searchInventory}">이전</a>
+			                </li>
+			            </c:if>
+			            <c:if test="${startPage <= 10}">
+			                <li class="page-item disabled">
+			                    <a class="page-link" href="#">이전</a>
+			                </li>
+			            </c:if>
+			            <c:forEach var="i" begin="${startPage}" end="${nextPage}">
+			                <c:if test="${i <= lastPage}">
+			                    <li class="page-item <c:if test='${i == currentPage}'>active</c:if>'">
+			                        <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${i}&searchInventory=${searchInventory}">${i}</a>
+			                    </li>
+			                </c:if>
+			            </c:forEach>
+			            <c:if test="${startPage + 10 <= lastPage}">
+			                <li class="page-item">
+			                    <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${startPage+10}&searchInventory=${searchInventory}">다음</a>
+			                </li>
+			            </c:if>
+			            <c:if test="${startPage + 10 > lastPage}">
+			                <li class="page-item disabled">
+			                    <a class="page-link" href="#">다음</a>
+			                </li>
+			            </c:if>
+			            <li class="page-item">
+			                <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${lastPage}&searchInventory=${searchInventory}">마지막</a>
+			            </li>
+			        </ul>
+			    </nav>
+			</div>
+			<div>
+				<form id="formSearchInventory" method="get" action="${pageContext.request.contextPath}/on/inventoryList">
+					<input type="hidden" name="storeId" value="${storeId}">
+					<input type="text" name="searchInventory" id = "searchInventory" value="${searchInventory}">
+					<button id="btnSearchInventory" type="button" class="btn btn-success">영화검색</button>
+				</form>
 				<a href="${pageContext.request.contextPath}/on/addInventory?storeId=${s.storeId}" class="btn btn-success">인벤토리추가</a>
 			</div>
-		<div>
-		    <nav aria-label="Page navigation">
-		        <ul class="pagination justify-content-center">
-		
-		            <li class="page-item">
-		                <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=1">처음</a>
-		            </li>
-		            <c:if test="${startPage > 10}">
-		                <li class="page-item">
-		                    <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${startPage-10}">이전</a>
-		                </li>
-		            </c:if>
-		            <c:if test="${startPage <= 10}">
-		                <li class="page-item disabled">
-		                    <a class="page-link" href="#">이전</a>
-		                </li>
-		            </c:if>
-		            <c:forEach var="i" begin="${startPage}" end="${endPage}">
-		                <c:if test="${i <= lastPage}">
-		                    <li class="page-item <c:if test='${i == currentPage}'>active</c:if>'">
-		                        <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${i}">${i}</a>
-		                    </li>
-		                </c:if>
-		            </c:forEach>
-		            <c:if test="${startPage + 10 <= lastPage}">
-		                <li class="page-item">
-		                    <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${startPage+10}">다음</a>
-		                </li>
-		            </c:if>
-		            <c:if test="${startPage + 10 > lastPage}">
-		                <li class="page-item disabled">
-		                    <a class="page-link" href="#">다음</a>
-		                </li>
-		            </c:if>
-		            <li class="page-item">
-		                <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${lastPage}">마지막</a>
-		            </li>
-		        </ul>
-		    </nav>
-		</div>
-		</div>
-	</div>
+		</div>	
 </body>
+<script>
+	$('#btnSearchInventory').click(function() {
+		if($('#searchInventory').val()== ''){
+			alert('검색어를 입력해주세요');
+			return;
+		}
+		$('#formSearchInventory').submit();
+	});
+</script>
 </html>

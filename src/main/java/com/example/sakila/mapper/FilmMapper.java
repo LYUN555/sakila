@@ -21,11 +21,11 @@ public interface FilmMapper {
 	
 	// category null 이거나 0 일때
 	List<Map<String,Object>> selectFilmList(Map<String,Object> paramMap);
-	int selectFilmCount();
+	int selectFilmCount(String searchName);
 	
 	// categoryId 가 null이거나 0이 아닐떄
 	List<Map<String,Object>> selectFilmListByCategory(Map<String,Object> paramMap);
-	int selectFilmCountByCategory(Integer categoryId);
+	int selectFilmCountByCategory(Map<String,Object> paramMap);
 	
 	Integer deleteFilmByKey(Integer filmId);
 	

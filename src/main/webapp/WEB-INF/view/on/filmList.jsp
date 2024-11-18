@@ -68,12 +68,12 @@
 			    <ul class="pagination justify-content-center">
 			    
 			        <li class="page-item">
-			            <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=1&categoryId=${currentCategoryId}">첫 페이지</a>
+			            <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=1&categoryId=${currentCategoryId}&searchFilm=${searchFilm}">첫 페이지</a>
 			        </li>
 			        
 			        <c:if test="${currentPage > 1}">
 			            <li class="page-item">
-			                <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=${currentPage-1}&categoryId=${currentCategoryId}">이전</a>
+			                <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=${currentPage-1}&categoryId=${currentCategoryId}&searchFilm=${searchFilm}">이전</a>
 			            </li>
 			        </c:if>
 			        <c:if test="${currentPage <= 1}">
@@ -86,7 +86,7 @@
 		            </li>
 			        <c:if test="${currentPage < lastPage}">
 			            <li class="page-item">
-			                <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=${currentPage+1}&categoryId=${currentCategoryId}">다음</a>
+			                <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=${currentPage+1}&categoryId=${currentCategoryId}&searchFilm=${searchFilm}">다음</a>
 			            </li>
 			        </c:if>
 			        <c:if test="${currentPage >= lastPage}">
@@ -96,13 +96,16 @@
 			        </c:if>
 			
 			        <li class="page-item">
-			            <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=${lastPage}&categoryId=${currentCategoryId}">마지막</a>
+			            <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=${lastPage}&categoryId=${currentCategoryId}&searchFilm=${searchFilm}">마지막</a>
 			        </li>
 			    </ul>
 			</nav>
 		</div>
 		<div>
-		
+			<form id="formSearchFilm" method="get" action="${pageContext.request.contextPath}/on/filmList">
+				<input type="text" name="searchFilm" id = "searchFilm" value="${searchFilm}">
+				<button id="btnSearchFilm" type="button" class="btn btn-success">영화검색</button>
+			</form>
 		</div>
 		</div>
 	</div>
@@ -111,6 +114,13 @@
 	$('#categoryId').change(function() {
 		//alert('change');
 		$('#formCategory').submit();
+	});
+	$('#btnSearchFilm').click(function() {
+		if($('#searchFilm').val()== ''){
+			alert('검색어를 입력해주세요');
+			return;
+		}
+		$('#formSearchFilm').submit();
 	});
 </script>
 </html>

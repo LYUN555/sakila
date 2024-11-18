@@ -27,17 +27,19 @@ public class InventoryController {
 	
 	// 인벤토리 페이징 구현해보기 이전...12345~10...다음
 	@GetMapping("/on/inventoryList")
-	public String inventoryList(Model model, @RequestParam Integer storeId, @RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "10") int rowPerPage) {
+	public String inventoryList(Model model,@RequestParam(required = false) String searchInventory ,@RequestParam Integer storeId, @RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "10") int rowPerPage) {
 		// 리스트 조회
-		List<Map<String, Object>> inventoryList = inventoryService.getInventoryListByStore(storeId, currentPage, rowPerPage);
+		List<Map<String, Object>> inventoryList = inventoryService.getInventoryListByStore(storeId, currentPage, rowPerPage, searchInventory);
 		// 페이징 계산에 필요한 변수
 		int startPage = (currentPage-1)/10*10+1; //1..11.. 21.. 31..
-		int endPage = startPage+9;
-		int lastPage = inventoryService.getLastPage(storeId, rowPerPage);
+		int numPerPage = 10;
+		int nextPage = startPage+(numPerPage-1);
+		int lastPage = inventoryService.getLastPage(storeId, rowPerPage, searchInventory);
 		log.debug("lastPage : "+lastPage);
+		model.addAttribute("searchInventory",searchInventory);
 		model.addAttribute("currentPage",currentPage);
 		model.addAttribute("startPage",startPage);
-		model.addAttribute("endPage",endPage);
+		model.addAttribute("nextPage",nextPage);
 		model.addAttribute("lastPage",lastPage);
 		model.addAttribute("inventoryList",inventoryList);
 		model.addAttribute("storeId",storeId);
