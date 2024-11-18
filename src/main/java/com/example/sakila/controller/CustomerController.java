@@ -53,4 +53,18 @@ public class CustomerController {
 		return "redirect:/on/customerList";
 	}
 	
+	@GetMapping("/on/customerList")
+	public String customerList(Model model, @RequestParam(defaultValue = "1") Integer currentPage, @RequestParam(defaultValue = "10") Integer rowPerPage) {
+		Map<String, Object> resultMap = customerService.getCustomerList(currentPage, rowPerPage);
+		
+		int lastPage = customerService.getLastPage(rowPerPage);
+		model.addAttribute("currentPage",currentPage);
+
+		model.addAttribute("lastPage",lastPage);
+		model.addAttribute("startPage",resultMap.get("startPage"));
+		model.addAttribute("nextPage",resultMap.get("nextPage"));
+		model.addAttribute("customerList",resultMap.get("customerList"));
+		return "on/customerList";
+	}
+	
 }

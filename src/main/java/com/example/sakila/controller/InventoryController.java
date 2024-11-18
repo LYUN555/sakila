@@ -30,15 +30,14 @@ public class InventoryController {
 	public String inventoryList(Model model, @RequestParam Integer storeId, @RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "10") int rowPerPage) {
 		// 리스트 조회
 		List<Map<String, Object>> inventoryList = inventoryService.getInventoryListByStore(storeId, currentPage, rowPerPage);
-		int totalRow = inventoryService.getTotalRow(storeId);
 		// 페이징 계산에 필요한 변수
 		int startPage = (currentPage-1)/10*10+1; //1..11.. 21.. 31..
-		int lastPage = totalRow / rowPerPage;
-		if(totalRow % rowPerPage != 0) {
-			lastPage++;
-		}
+		int endPage = startPage+9;
+		int lastPage = inventoryService.getLastPage(storeId, rowPerPage);
+		log.debug("lastPage : "+lastPage);
 		model.addAttribute("currentPage",currentPage);
 		model.addAttribute("startPage",startPage);
+		model.addAttribute("endPage",endPage);
 		model.addAttribute("lastPage",lastPage);
 		model.addAttribute("inventoryList",inventoryList);
 		model.addAttribute("storeId",storeId);

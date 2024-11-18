@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.sakila.mapper.InventoryMapper;
 import com.example.sakila.vo.Inventory;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 @Transactional
 public class InventoryService {
@@ -30,8 +33,14 @@ public class InventoryService {
 		return inventoryMapper.selectInventoryListByStore(paramMap);
 	}
 	
-	public Integer getTotalRow(Integer storeId) {
-		return inventoryMapper.selectInventoryTotalRowBystoreId(storeId);
+	public Integer getLastPage(Integer storeId, Integer rowPerPage) {
+		log.debug("getLastPage storeId:"+storeId);
+		int totalRow = inventoryMapper.selectInventoryTotalRowBystoreId(storeId);
+		int lastPage = totalRow / rowPerPage;
+		if(totalRow % rowPerPage != 0) {
+			lastPage++;
+		}
+		return lastPage;
 	}
 	
 	public Integer addInventory(Inventory inventory) {
