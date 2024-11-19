@@ -71,25 +71,29 @@
 			            <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=1&categoryId=${currentCategoryId}&searchFilm=${searchFilm}">첫 페이지</a>
 			        </li>
 			        
-			        <c:if test="${currentPage > 1}">
+			        <c:if test="${startPage > 10}">
 			            <li class="page-item">
-			                <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=${currentPage-1}&categoryId=${currentCategoryId}&searchFilm=${searchFilm}">이전</a>
+			                <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=${startPage - 10}&categoryId=${currentCategoryId}&searchFilm=${searchFilm}">이전</a>
 			            </li>
 			        </c:if>
-			        <c:if test="${currentPage <= 1}">
+			        <c:if test="${startPage < 10}">
 			            <li class="page-item disabled">
 			                <a class="page-link" href="#">이전</a>
 			            </li>
 			        </c:if>
-					<li class="page-item">
-		                <span class="page-link">${currentPage}</span>
-		            </li>
-			        <c:if test="${currentPage < lastPage}">
+					<c:forEach var="i" begin="${startPage}" end="${endPage}">
+		                <c:if test="${i <= lastPage}">
+		                    <li class="page-item">
+		                        <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=${i}&searchFilm=${searchFilm}">${i}</a>
+		                    </li>
+		                </c:if>
+		            </c:forEach>
+			        <c:if test="${startPage + 10 < lastPage}">
 			            <li class="page-item">
-			                <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=${currentPage+1}&categoryId=${currentCategoryId}&searchFilm=${searchFilm}">다음</a>
+			                <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=${startPage + 10}&categoryId=${currentCategoryId}&searchFilm=${searchFilm}">다음</a>
 			            </li>
 			        </c:if>
-			        <c:if test="${currentPage >= lastPage}">
+			        <c:if test="${startPage + 10 > lastPage}">
 			            <li class="page-item disabled">
 			                <a class="page-link" href="#">다음</a>
 			            </li>

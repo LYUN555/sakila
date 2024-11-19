@@ -100,7 +100,7 @@
 						<tr>
 							<td>${r.rentalId}</td>
 							<td>${r.inventoryId}</td>
-							<td>${r.title}</td>
+							<td><a href="${pageContext.request.contextPath}/on/filmOne?filmId=${r.filmId}">${r.title}</a></td>
 							<td>${r.amount}</td>
 							<td>${r.rentalDate}</td>
 						</tr>

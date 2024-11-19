@@ -38,7 +38,6 @@ public class InventoryController {
 		List<Map<String, Object>> inventoryList = inventoryService.getInventoryListByStore(storeId, page, searchInventory);
 		// 페이징 계산에 필요한 변수
 		int startPage = page.getStartPage(); //1..11.. 21.. 31..
-		int numPerPage = page.getNumPerPage();
 		int endPage = page.getEndPage();
 		int lastPage = inventoryService.getLastPage(storeId, page, searchInventory);
 		log.debug("lastPage : "+lastPage);

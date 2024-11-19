@@ -25,6 +25,7 @@ import com.example.sakila.vo.Actor;
 import com.example.sakila.vo.Category;
 import com.example.sakila.vo.FilmForm;
 import com.example.sakila.vo.Language;
+import com.example.sakila.vo.Page;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,14 +49,6 @@ public class FilmController {
 	
 	@GetMapping("/on/filmOne")
 	public String filmOne(Model model, @RequestParam Integer filmId, @RequestParam(required = false) String searchName) {
-		
-		/*
-		 * 1) 필름 정보
-		 * 2) 전체 카테고리
-		 * 3) 현재 작품의 카테고리 리스트
-		 * 4) 검색 배우 리스트(searchName != null)
-		 * 5) 현재필름의 배우 리스트
-		 * */
 		
 		// 1)
 		Map<String, Object> film = filmService.getFilmOne(filmId);
@@ -104,11 +97,16 @@ public class FilmController {
 	public String filmList(Model model,@RequestParam(required = false) String searchFilm, @RequestParam(required = false) Integer categoryId, @RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "10") int rowPerPage) {
 		log.debug("categoryId : "+categoryId);
 		log.debug("searchFilm : "+searchFilm);
-		List<Map<String, Object>> filmList = filmService.getFilmList(categoryId, currentPage, rowPerPage, searchFilm);
+		Page page = new Page();
+		page.setCurrentPage(currentPage);
+		page.setRowPerPage(rowPerPage);
+		page.setNumPerPage(10);
+		
+		List<Map<String, Object>> filmList = filmService.getFilmList(categoryId, page, searchFilm);
 		log.debug("filmList : "+filmList);
 		List<Category> categoryList = categoryService.getCategoryList();
 		log.debug("categoryList : "+categoryList);
-		int lastPage = filmService.getTotalCount(categoryId, rowPerPage, searchFilm);
+		int lastPage = filmService.getTotalCount(categoryId, page, searchFilm);
 		log.debug("currentPage : "+currentPage);
 		log.debug("rowPerPage : "+rowPerPage);
 		log.debug("lastPage : "+lastPage);
@@ -117,6 +115,8 @@ public class FilmController {
 		model.addAttribute("filmList", filmList);
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("startPage", page.getStartPage());
+		model.addAttribute("endPage", page.getEndPage());
 		model.addAttribute("currentCategoryId", categoryId);
 		model.addAttribute("lastPage", lastPage);
 		

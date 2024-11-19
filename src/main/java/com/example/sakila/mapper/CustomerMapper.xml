@@ -64,6 +64,7 @@
 	<select id="selectCustomerOneByRentalList" parameterType="Integer" resultType="Map">
 		select 
 			r.rental_id rentalId,
+		    f.film_id filmId,
 		    i.inventory_id inventoryId,
 		    f.title title,
 		    p.amount amount,

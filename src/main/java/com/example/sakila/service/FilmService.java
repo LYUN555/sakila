@@ -13,6 +13,7 @@ import com.example.sakila.mapper.FilmCategoryMapper;
 import com.example.sakila.mapper.FilmMapper;
 import com.example.sakila.vo.Film;
 import com.example.sakila.vo.FilmForm;
+import com.example.sakila.vo.Page;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -73,7 +74,7 @@ public class FilmService {
 	}
 	
 	// 필름 리스트
-	public List<Map<String,Object>> getFilmList(Integer categoryId, int currentPage, int rowPerPage, String searchFilm){
+	public List<Map<String,Object>> getFilmList(Integer categoryId, Page page, String searchFilm){
 		Map<String, Object> paramMap = new HashMap<>();
 		if(categoryId == null || categoryId == 0) {
 			paramMap.put("categoryId", null);
@@ -83,9 +84,8 @@ public class FilmService {
 		if(searchFilm != null) {
 			paramMap.put("searchFilm", searchFilm);
 		}
-		int beginRow = (currentPage-1) * rowPerPage;
-		paramMap.put("beginRow", beginRow);
-		paramMap.put("rowPerPage", rowPerPage);
+		paramMap.put("beginRow", page.getBeginRow());
+		paramMap.put("rowPerPage", page.getRowPerPage());
 		if(paramMap.get("categoryId") == null) {
 			return filmMapper.selectFilmList(paramMap);
 		} else {
@@ -93,7 +93,7 @@ public class FilmService {
 		}
 	}
 	// 필름 리스트 페이징
-	public int getTotalCount(Integer categoryId, int rowPerPage, String searchFilm) {
+	public int getTotalCount(Integer categoryId, Page page, String searchFilm) {
 		int count = 0;
 		Map<String,Object> paramMap = new HashMap<>();
 		paramMap.put("categoryId", categoryId);
@@ -104,10 +104,7 @@ public class FilmService {
 		} else {
 			count = filmMapper.selectFilmCountByCategory(paramMap);
 		}
-		int lastPage = count / rowPerPage;
-		if(count % rowPerPage != 0) {
-			lastPage++;
-		}
+		int lastPage = page.getLastPage(count);
 		return lastPage;
 	}
 	

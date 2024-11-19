@@ -18,6 +18,7 @@ import com.example.sakila.mapper.FilmActorMapper;
 import com.example.sakila.vo.Actor;
 import com.example.sakila.vo.ActorFile;
 import com.example.sakila.vo.ActorForm;
+import com.example.sakila.vo.Page;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,22 +45,18 @@ public class ActorService {
 		return actorMapper.selectActorOne(actorId);
 	}
 
-	public List<Actor> getActorList(int currentPage, int rowPerPage, String searchWord) {
+	public List<Actor> getActorList(Page page, String searchWord) {
 		Map<String, Object> paramMap = new HashMap<>();
-		int beginRow = (currentPage - 1) * rowPerPage;
-		paramMap.put("beginRow", beginRow);
-		paramMap.put("rowPerPage", rowPerPage);
+		paramMap.put("beginRow", page.getBeginRow());
+		paramMap.put("rowPerPage", page.getRowPerPage());
 		paramMap.put("searchWord", searchWord);
 
 		return actorMapper.selectActorList(paramMap);
 	}
 
-	public int getTotalCount(int rowPerPage, String searchWord) {
+	public int getTotalCount(Page page, String searchWord) {
 		int count = actorMapper.selectActorCount(searchWord);
-		int lastPage = count / rowPerPage;
-		if (count % rowPerPage != 0) {
-			lastPage++;
-		}
+		int lastPage = page.getLastPage(count);
 		return lastPage;
 	}
 

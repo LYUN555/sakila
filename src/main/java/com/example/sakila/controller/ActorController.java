@@ -17,6 +17,7 @@ import com.example.sakila.vo.Actor;
 import com.example.sakila.vo.ActorFile;
 import com.example.sakila.vo.ActorForm;
 import com.example.sakila.vo.Film;
+import com.example.sakila.vo.Page;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -59,13 +60,20 @@ public class ActorController {
 							@RequestParam(defaultValue = "10") int rowPerPage,
 							@RequestParam(required = false) String searchWord) {
 		log.debug("searchWord : "+searchWord);
-		
-		int lastPage = actorService.getTotalCount(rowPerPage, searchWord);
+		Page page = new Page();
+		page.setCurrentPage(currentPage);
+		page.setRowPerPage(rowPerPage);
+		page.setNumPerPage(10);
+		int startPage = page.getStartPage();
+		int lastPage = actorService.getTotalCount(page, searchWord);
+		int endPage = page.getEndPage();
 		log.debug("lastPage : "+lastPage);
 		log.debug("currentPage : "+currentPage);
-		List<Actor> actorList = actorService.getActorList(currentPage, rowPerPage, searchWord);
+		List<Actor> actorList = actorService.getActorList(page, searchWord);
 		model.addAttribute("actorList",actorList);
 		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("endPage",endPage);
 		model.addAttribute("lastPage",lastPage);
 		model.addAttribute("searchWord",searchWord);
 		return "on/actorList";
