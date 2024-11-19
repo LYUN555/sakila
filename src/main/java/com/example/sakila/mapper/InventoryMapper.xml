@@ -10,21 +10,39 @@
 	
 	<!-- inventortList(storId) 추가예정 film,rental, payment, customer -->
 	<select id="selectInventoryListByStore" parameterType="Map" resultType="Map">
-		select 
-			i.inventory_id inventoryId,
-		    i.film_id filmId,
-		    f.title title,
-		    i.last_update lastUpdate
-		from inventory i inner join film f
-		on i.film_id = f.film_id
-		<where>
-			i.store_id = #{storeId}
-			<if test="searchInventory != null and searchInventory != '' ">
-				 and f.title like concat('%',#{searchInventory},'%')
-			</if>
-		</where>
-		order by i.inventory_id desc
-		limit #{beginRow},#{rowPerPage}
+	    select 
+	        t1.inventory_id as inventoryId,
+	        t1.film_id filmId,
+	        t1.title title,
+	        t1.last_update lastUpdate,
+	        t2.customer_id customerId,
+	        ifnull(t2.rental_date, '대여가능') rentalDate
+	    from (
+	        select 
+	            i.inventory_id,
+	            i.film_id,
+	            f.title,
+	            i.last_update,
+	            i.store_id
+	        from inventory i 
+	        inner join film f on i.film_id = f.film_id
+	    ) t1
+	    left join (
+	        select 
+	            inventory_id,
+	            customer_id,
+	            rental_date
+	        from rental
+	        where return_date is null
+	    ) t2 on t1.inventory_id = t2.inventory_id
+	    <where>
+	        t1.store_id = #{storeId}
+	        <if test="searchInventory != null and searchInventory != ''">
+	            and t1.title like concat('%', #{searchInventory}, '%')
+	        </if>
+	    </where>
+	    order by t1.inventory_id desc
+	    limit #{beginRow}, #{rowPerPage}
 	</select>
 	
 	<!-- inventoryTotalRowBystoreId -->
