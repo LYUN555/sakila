@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.sakila.mapper.CustomerMapper;
 import com.example.sakila.vo.Customer;
+import com.example.sakila.vo.Page;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,34 +27,26 @@ public class CustomerService {
 	}
 
 	// 전체 페이지
-	public Map<String, Object> getCustomerList(Integer currentPage, Integer rowPerPage, String searchName) {
-		int beginRow = (currentPage - 1) * rowPerPage;
+	public Map<String, Object> getCustomerList(Page page, String searchName) {
 		Map<String, Object> paramMap = new HashMap<>();
-		paramMap.put("beginRow", beginRow);
-		paramMap.put("rowPerPage", rowPerPage);
+		paramMap.put("beginRow", page.getBeginRow());
+		paramMap.put("rowPerPage", page.getRowPerPage());
 		paramMap.put("searchName", searchName);
 		List<Customer> customerList = customerMapper.selectCustomerList(paramMap);
 
-		int startPage = (currentPage - 1) / 10 * 10 + 1;
-		int numPerPage = 10;
-		int nextPage = startPage + (numPerPage - 1);
-
 		Map<String, Object> resultMap = new HashMap<>();
-		resultMap.put("startPage", startPage);
-		resultMap.put("nextPage", nextPage);
+		resultMap.put("startPage", page.getStartPage());
+		resultMap.put("endPage", page.getEndPage());
 		resultMap.put("customerList", customerList);
 
 		return resultMap;
 	}
 
 	// 전체 페이지
-	public Integer getLastPage(Integer rowPerPage, String searchName) {
+	public Integer getLastPage(Page page, String searchName) {
 		int totalRow = customerMapper.getTotalRow(searchName);
 
-		int lastPage = totalRow / rowPerPage;
-		if (totalRow % rowPerPage != 0) {
-			lastPage++;
-		}
+		int lastPage = page.getLastPage(totalRow);
 
 		return lastPage;
 	}
@@ -61,6 +54,18 @@ public class CustomerService {
 	public List<Customer> getCustomerListByName(String searchName){
 		return customerMapper.selectCustomerListByName(searchName);
 	}
+	
+	// 고객정보 대여리스트
+	public List<Map<String,Object>> getSelectCustomerOneByRentalList(Integer customerId) {
+		return customerMapper.selectCustomerOneByRentalList(customerId);
+	}
+	// 고객 정보
+	public Map<String,Object> getSelectCustomerOne(Integer customerId) {
+		return customerMapper.selectCustomerOne(customerId);
+	}
+
+
+	
 
 
 }

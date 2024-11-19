@@ -17,5 +17,10 @@ public interface CustomerMapper {
 	
 	// addRental
 	List<Customer> selectCustomerListByName(String searchName);
+	
+	//customerOne 렌탈 리스트
+	List<Map<String,Object>> selectCustomerOneByRentalList(Integer customerId);
+	// customerOne 개인정보
+	Map<String, Object> selectCustomerOne(Integer customerId);
 
 }

@@ -59,4 +59,45 @@
 		where active = 1 and
 		concat(first_name, last_name) like concat('%',#{searchName},'%')
 	</select>
+	
+	<!-- CustomerOneByRentalList -->
+	<select id="selectCustomerOneByRentalList" parameterType="Integer" resultType="Map">
+		select 
+			r.rental_id rentalId,
+		    i.inventory_id inventoryId,
+		    f.title title,
+		    p.amount amount,
+		    r.rental_date rentalDate
+		from rental r inner join inventory i
+		on r.inventory_id = i.inventory_id inner join film f
+		on i.film_id = f.film_id inner join payment p
+		on r.rental_id = p.rental_id
+		where r.customer_id = #{customerId}
+		order by rentalDate desc
+	</select>
+	
+	<!-- CustomerOne -->
+	<select id="selectCustomerOne" parameterType="Integer" resultType="Map">
+		select 
+			cu.customer_id customerId,
+		    cu.store_id storeId,
+		    cu.first_name firstName,
+		    cu.last_name lastName,
+		    cu.address_id addressId,
+		    cu.email email,
+		    a.address address,
+		    a.district district,
+		    a.postal_code postalCode,
+			a.phone phone,
+		    a.city_id cityId,
+		    ci.city city,
+		    ci.country_id countryId,
+		    co.country country,
+		    cu.create_date createDate
+		from customer cu left join address a
+		on cu.address_id = a.address_id inner join city ci
+		on a.city_id = ci.city_id inner join country co
+		on ci.country_id = co.country_id
+		where cu.customer_id = #{customerId}
+	</select>
 </mapper>

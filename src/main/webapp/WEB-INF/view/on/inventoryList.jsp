@@ -69,7 +69,7 @@
 			                    <a class="page-link" href="#">이전</a>
 			                </li>
 			            </c:if>
-			            <c:forEach var="i" begin="${startPage}" end="${nextPage}">
+			            <c:forEach var="i" begin="${startPage}" end="${endPage}">
 			                <c:if test="${i <= lastPage}">
 			                    <li class="page-item <c:if test='${i == currentPage}'>active</c:if>'">
 			                        <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${i}&searchInventory=${searchInventory}">${i}</a>

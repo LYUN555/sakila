@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.sakila.mapper.InventoryMapper;
 import com.example.sakila.vo.Inventory;
+import com.example.sakila.vo.Page;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,28 +25,24 @@ public class InventoryService {
 		return inventoryMapper.selectCountInventoryByFilm(filmId);
 	}
 
-	public List<Map<String,Object>> getInventoryListByStore(Integer storeId,Integer currentPage, Integer rowPerPage, String searchInventory){
-		int beginRow = (currentPage-1)*rowPerPage;
+	public List<Map<String,Object>> getInventoryListByStore(Integer storeId, Page page, String searchInventory){
 		Map<String,Object> paramMap = new HashMap<>();
 		paramMap.put("storeId", storeId);
-		paramMap.put("beginRow", beginRow);
-		paramMap.put("rowPerPage", rowPerPage);
+		paramMap.put("beginRow", page.getBeginRow());
+		paramMap.put("rowPerPage", page.getRowPerPage());
 		paramMap.put("searchInventory", searchInventory);
 		
 		log.debug("paramMap : "+paramMap);
 		return inventoryMapper.selectInventoryListByStore(paramMap);
 	}
 	
-	public Integer getLastPage(Integer storeId, Integer rowPerPage, String searchInventory) {
+	public Integer getLastPage(Integer storeId, Page page, String searchInventory) {
 		log.debug("getLastPage storeId:"+storeId);
 		Map<String,Object> paramMap = new HashMap<>();
 		paramMap.put("storeId", storeId);
 		paramMap.put("searchInventory", searchInventory);
 		int totalRow = inventoryMapper.selectInventoryTotalRowBystoreId(paramMap);
-		int lastPage = totalRow / rowPerPage;
-		if(totalRow % rowPerPage != 0) {
-			lastPage++;
-		}
+		int lastPage = page.getLastPage(totalRow);
 		return lastPage;
 	}
 	

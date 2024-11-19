@@ -20,6 +20,9 @@
 		<div class="col-sm-10">
 			<!-- main content -->
 			<h1>CUSTOMER LIST</h1>
+			<div>
+				<a href="${pageContext.request.contextPath}/on/customerList" class="btn btn-primary">전체</a>
+			</div>
 			<table class="table table-striped">
 				<tr>
 					<th>customerId</th>
@@ -32,7 +35,7 @@
 				</tr>
 				<c:forEach var="c" items="${customerList}">
 					<tr>
-						<td><a href="">${c.customerId}</a></td><!-- 렌탈 x 지불 조인 -->			
+						<td><a href="${pageContext.request.contextPath}/on/customerOne?customerId=${c.customerId}">${c.customerId}</a></td><!-- 렌탈 x 지불 조인 -->			
 						<td>${c.storeId }</td>			
 						<td>${c.firstName} ${c.lastName}</td>			
 						<td>${c.email}</td>			
@@ -59,7 +62,7 @@
 			                    <a class="page-link" href="#">이전</a>
 			                </li>
 			            </c:if>
-			            <c:forEach var="i" begin="${startPage}" end="${nextPage}">
+			            <c:forEach var="i" begin="${startPage}" end="${endPage}">
 			                <c:if test="${i <= lastPage}">
 			                    <li class="page-item">
 			                        <a class="page-link" href="${pageContext.request.contextPath}/on/customerList?currentPage=${i}&searchName=${searchName}">${i}</a>
