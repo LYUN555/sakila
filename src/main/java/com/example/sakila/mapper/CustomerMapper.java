@@ -14,5 +14,8 @@ public interface CustomerMapper {
 	// 전체 페이지
 	List<Customer> selectCustomerList(Map<String,Object> paramMap);
 	Integer getTotalRow(String searchName);
+	
+	// addRental
+	List<Customer> selectCustomerListByName(String searchName);
 
 }

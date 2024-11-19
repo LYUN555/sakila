@@ -57,6 +57,10 @@ public class CustomerService {
 
 		return lastPage;
 	}
+	
+	public List<Customer> getCustomerListByName(String searchName){
+		return customerMapper.selectCustomerListByName(searchName);
+	}
 
 
 }

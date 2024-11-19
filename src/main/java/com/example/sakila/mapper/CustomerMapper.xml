@@ -32,8 +32,7 @@
 		from customer
 		<where>
 	        <if test="searchName != null and searchName != ''">
-	            first_name like concat('%', #{searchName}, '%')
-	            or last_name like concat('%', #{searchName}, '%')
+	           concat(first_name, last_name) like concat('%',#{searchName},'%')
 	        </if>
    	 	</where>
 		order by customer_id desc
@@ -45,10 +44,19 @@
 		select count(*) from customer
 		<where>
 			<if test="searchName != null and searchName != ''">
-				first_name like concat('%',#{searchName},'%')
-				or last_name like concat('%',#{searchName},'%')
+				concat(first_name, last_name) like concat('%',#{searchName},'%')
 			</if>
 		</where>
-		
+	</select>
+	<!-- addRental -->
+	<select id="selectCustomerListByName" parameterType="Map" resultType="com.example.sakila.vo.Customer">
+		select 
+			customer_id customerId,
+		    first_name firstName,
+		    last_name lastName,
+		    email
+		from customer
+		where active = 1 and
+		concat(first_name, last_name) like concat('%',#{searchName},'%')
 	</select>
 </mapper>
