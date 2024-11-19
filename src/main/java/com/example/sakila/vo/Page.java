@@ -19,8 +19,8 @@ public class Page {
 		return this.getStartPage()+(numPerPage-1);
 	}
 	public int getLastPage(int totalRow) {
-		int lastPage = totalRow / rowPerPage;
-		if (totalRow % rowPerPage != 0) {
+		int lastPage = totalRow / this.rowPerPage;
+		if (totalRow % this.rowPerPage != 0) {
 			lastPage++;
 		}
 
