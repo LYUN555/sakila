@@ -11,7 +11,7 @@
 	<!-- inventortList(storId) 추가예정 film,rental, payment, customer -->
 	<select id="selectInventoryListByStore" parameterType="Map" resultType="Map">
 	    select 
-	        t1.inventory_id as inventoryId,
+	        t1.inventory_id inventoryId,
 	        t1.film_id filmId,
 	        t1.title title,
 	        t1.last_update lastUpdate,
