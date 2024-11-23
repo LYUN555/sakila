@@ -52,12 +52,12 @@
 			            <li class="page-item">
 			                <a class="page-link" href="${pageContext.request.contextPath}/on/customerList?currentPage=1&searchName=${searchName}">처음</a>
 			            </li>
-			            <c:if test="${startPage > 10}">
+			            <c:if test="${startPage > numPerPage}">
 			                <li class="page-item">
-			                    <a class="page-link" href="${pageContext.request.contextPath}/on/customerList?currentPage=${startPage-10}&searchName=${searchName}">이전</a>
+			                    <a class="page-link" href="${pageContext.request.contextPath}/on/customerList?currentPage=${startPage-numPerPage}&searchName=${searchName}">이전</a>
 			                </li>
 			            </c:if>
-			            <c:if test="${startPage <= 10}">
+			            <c:if test="${startPage < numPerPage}">
 			                <li class="page-item disabled">
 			                    <a class="page-link" href="#">이전</a>
 			                </li>
@@ -69,12 +69,12 @@
 			                    </li>
 			                </c:if>
 			            </c:forEach>
-			            <c:if test="${startPage + 10 <= lastPage}">
+			            <c:if test="${startPage + numPerPage <= lastPage}">
 			                <li class="page-item">
-			                    <a class="page-link" href="${pageContext.request.contextPath}/on/customerList?currentPage=${startPage+10}&searchName=${searchName}">다음</a>
+			                    <a class="page-link" href="${pageContext.request.contextPath}/on/customerList?currentPage=${startPage+numPerPage}&searchName=${searchName}">다음</a>
 			                </li>
 			            </c:if>
-			            <c:if test="${startPage + 10 > lastPage}">
+			            <c:if test="${startPage + numPerPage > lastPage}">
 			                <li class="page-item disabled">
 			                    <a class="page-link" href="#">다음</a>
 			                </li>

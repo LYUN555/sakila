@@ -59,12 +59,12 @@
 			            <li class="page-item">
 			                <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=1&searchInventory=${searchInventory}">처음</a>
 			            </li>
-			            <c:if test="${startPage > 10}">
+			            <c:if test="${startPage > numPerPage}">
 			                <li class="page-item">
-			                    <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${startPage-10}&searchInventory=${searchInventory}">이전</a>
+			                    <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${startPage-numPerPage}&searchInventory=${searchInventory}">이전</a>
 			                </li>
 			            </c:if>
-			            <c:if test="${startPage <= 10}">
+			            <c:if test="${startPage < numPerPage}">
 			                <li class="page-item disabled">
 			                    <a class="page-link" href="#">이전</a>
 			                </li>
@@ -76,12 +76,12 @@
 			                    </li>
 			                </c:if>
 			            </c:forEach>
-			            <c:if test="${startPage + 10 <= lastPage}">
+			            <c:if test="${startPage + numPerPage <= lastPage}">
 			                <li class="page-item">
-			                    <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${startPage+10}&searchInventory=${searchInventory}">다음</a>
+			                    <a class="page-link" href="${pageContext.request.contextPath}/on/inventoryList?storeId=${storeId}&currentPage=${startPage+numPerPage}&searchInventory=${searchInventory}">다음</a>
 			                </li>
 			            </c:if>
-			            <c:if test="${startPage + 10 > lastPage}">
+			            <c:if test="${startPage + numPerPage > lastPage}">
 			                <li class="page-item disabled">
 			                    <a class="page-link" href="#">다음</a>
 			                </li>

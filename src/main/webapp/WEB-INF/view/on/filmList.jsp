@@ -71,12 +71,12 @@
 			            <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=1&categoryId=${currentCategoryId}&searchFilm=${searchFilm}">첫 페이지</a>
 			        </li>
 			        
-			        <c:if test="${startPage > 10}">
+			        <c:if test="${startPage > numPerPage}">
 			            <li class="page-item">
-			                <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=${startPage - 10}&categoryId=${currentCategoryId}&searchFilm=${searchFilm}">이전</a>
+			                <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=${startPage - numPerPage}&categoryId=${currentCategoryId}&searchFilm=${searchFilm}">이전</a>
 			            </li>
 			        </c:if>
-			        <c:if test="${startPage < 10}">
+			        <c:if test="${startPage < numPerPage}">
 			            <li class="page-item disabled">
 			                <a class="page-link" href="#">이전</a>
 			            </li>
@@ -88,12 +88,12 @@
 		                    </li>
 		                </c:if>
 		            </c:forEach>
-			        <c:if test="${startPage + 10 < lastPage}">
+			        <c:if test="${startPage + numPerPage <= lastPage}">
 			            <li class="page-item">
-			                <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=${startPage + 10}&categoryId=${currentCategoryId}&searchFilm=${searchFilm}">다음</a>
+			                <a class="page-link" href="${pageContext.request.contextPath}/on/filmList?currentPage=${startPage + numPerPage}&categoryId=${currentCategoryId}&searchFilm=${searchFilm}">다음</a>
 			            </li>
 			        </c:if>
-			        <c:if test="${startPage + 10 > lastPage}">
+			        <c:if test="${startPage + numPerPage > lastPage}">
 			            <li class="page-item disabled">
 			                <a class="page-link" href="#">다음</a>
 			            </li>

@@ -65,12 +65,13 @@ public class CustomerController {
 
 		Map<String, Object> resultMap = customerService.getCustomerList(page, searchName);
 		int lastPage = customerService.getLastPage(page, searchName);
-
+		int numPerPage = page.getNumPerPage();
 		model.addAttribute("searchName", searchName);
 		model.addAttribute("currentPage", currentPage);
 
 		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("startPage", resultMap.get("startPage"));
+		model.addAttribute("numPerPage",numPerPage);
 		model.addAttribute("endPage", resultMap.get("endPage"));
 		model.addAttribute("customerList", resultMap.get("customerList"));
 		return "on/customerList";

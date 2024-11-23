@@ -23,7 +23,6 @@ public class Page {
 		if (totalRow % this.rowPerPage != 0) {
 			lastPage++;
 		}
-
 		return lastPage;
 	}
 }

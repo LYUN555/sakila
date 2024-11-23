@@ -107,6 +107,7 @@ public class FilmController {
 		List<Category> categoryList = categoryService.getCategoryList();
 		log.debug("categoryList : "+categoryList);
 		int lastPage = filmService.getTotalCount(categoryId, page, searchFilm);
+		int numPerPage = page.getNumPerPage();
 		log.debug("currentPage : "+currentPage);
 		log.debug("rowPerPage : "+rowPerPage);
 		log.debug("lastPage : "+lastPage);
@@ -115,6 +116,7 @@ public class FilmController {
 		model.addAttribute("filmList", filmList);
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("numPerPage", numPerPage);
 		model.addAttribute("startPage", page.getStartPage());
 		model.addAttribute("endPage", page.getEndPage());
 		model.addAttribute("currentCategoryId", categoryId);

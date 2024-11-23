@@ -40,10 +40,12 @@ public class InventoryController {
 		int startPage = page.getStartPage(); //1..11.. 21.. 31..
 		int endPage = page.getEndPage();
 		int lastPage = inventoryService.getLastPage(storeId, page, searchInventory);
+		int numPerPage = page.getNumPerPage();
 		log.debug("lastPage : "+lastPage);
 		model.addAttribute("searchInventory",searchInventory);
 		model.addAttribute("currentPage",currentPage);
 		model.addAttribute("startPage",startPage);
+		model.addAttribute("numPerPage",numPerPage);
 		model.addAttribute("endPage",endPage);
 		model.addAttribute("lastPage",lastPage);
 		model.addAttribute("inventoryList",inventoryList);
