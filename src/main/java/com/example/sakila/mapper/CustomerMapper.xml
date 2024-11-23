@@ -71,7 +71,7 @@
 		    r.rental_date rentalDate
 		from rental r inner join inventory i
 		on r.inventory_id = i.inventory_id inner join film f
-		on i.film_id = f.film_id inner join payment p
+		on i.film_id = f.film_id left join payment p
 		on r.rental_id = p.rental_id
 		where r.customer_id = #{customerId}
 		order by rentalDate desc

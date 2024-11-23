@@ -104,11 +104,5 @@
 			</div>
 		</div>
 	</div>
-	<div>
-		<a href="">비밀번호 수정</a>
-		<a href="">이메일 수정</a>
-		<a href="">주소 수정</a>
-		<a href="">STORE 수정</a>
-	</div>
 </body>
 </html>
